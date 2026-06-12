@@ -43,12 +43,12 @@ export const Route = createFileRoute("/")({
 });
 
 const communities = [
-  { name: "Two City Plaza", type: "Luxury High-Rise", url: "https://twocityplazapb.com" },
+  { name: "Two City Plaza", type: "Luxury High Rise", url: "https://twocityplazapb.com" },
   { name: "Water Club", type: "Waterfront Condo", url: "https://waterclublivingpb.com" },
-  { name: "Alton", type: "Master-Planned Community", url: "https://altonpb.com" },
+  { name: "Alton", type: "Gated Community", url: "https://altonpb.com" },
   { name: "Vista Blue", type: "Oceanfront Condo", url: "https://vistabluepb.com" },
-  { name: "Seven Bridges", type: "SFH Gated Community", url: "https://sevenbridgespb.com" },
-  { name: "Boca Bridges", type: "SFH Gated Community", url: "https://bocabridgespb.com" },
+  { name: "Seven Bridges", type: "Gated Community", url: "https://sevenbridgespb.com" },
+  { name: "Boca Bridges", type: "Gated Community", url: "https://bocabridgespb.com" },
   { name: "The Bristol", type: "Luxury High-Rise", url: "https://thebristolpb.com" },
 ];
 
