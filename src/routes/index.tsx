@@ -605,6 +605,7 @@ function Index() {
           </div>
         </div>
       </footer>
+      </main>
     </div>
   );
 }
