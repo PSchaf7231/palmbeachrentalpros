@@ -118,7 +118,7 @@ function Index() {
                 <span className="text-gold">Redefined</span> in Palm Beach
               </h1>
               <p className="text-base sm:text-lg text-foreground/70 max-w-lg mb-6 leading-relaxed">
-                Exclusive access to the finest waterfront estates, golf
+                Exclusive access to the finest waterfront estates, gated
                 communities, and premier high-rise residences.
               </p>
               <div className="flex flex-wrap gap-3">
