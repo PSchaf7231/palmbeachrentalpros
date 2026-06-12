@@ -103,29 +103,28 @@ function Index() {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80')] bg-cover bg-center opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="animate-fade-in-up">
-              <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 mb-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 mb-4">
                 <Star className="h-3.5 w-3.5 text-gold" />
                 <span className="text-xs font-semibold text-gold uppercase tracking-wider">
                   Palm Beach County&apos;s Elite Rental Specialists
                 </span>
               </div>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] mb-6">
+              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.1] mb-4">
                 Luxury Living
                 <br />
                 <span className="text-gold">Redefined</span> in Palm Beach
               </h1>
-              <p className="text-base sm:text-lg text-foreground/70 max-w-lg mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-foreground/70 max-w-lg mb-6 leading-relaxed">
                 Exclusive access to the finest waterfront estates, golf
-                communities, and premier high-rise residences. Your dream home
-                awaits in Boca Raton, Delray Beach, and beyond.
+                communities, and premier high-rise residences.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3">
                 <a
                   href="#listings"
-                  className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
+                  className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
                 >
                   <Search className="h-4 w-4" />
                   Browse Listings
@@ -133,18 +132,18 @@ function Index() {
                 </a>
                 <a
                   href={`tel:${AGENT_PHONE_TEL}`}
-                  className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-6 py-3 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
+                  className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
                 >
                   <Phone className="h-4 w-4" />
                   Call {AGENT_PHONE_DISPLAY}
                 </a>
               </div>
-              <div className="mt-10 flex items-center gap-6">
-                <div className="flex -space-x-3">
+              <div className="mt-6 flex items-center gap-4">
+                <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
                     <div
                       key={i}
-                      className="h-10 w-10 rounded-full border-2 border-navy bg-gradient-to-br from-gold/40 to-gold/10 flex items-center justify-center text-xs font-bold text-gold"
+                      className="h-8 w-8 rounded-full border-2 border-navy bg-gradient-to-br from-gold/40 to-gold/10 flex items-center justify-center text-[10px] font-bold text-gold"
                     >
                       {String.fromCharCode(64 + i)}
                     </div>
@@ -159,29 +158,29 @@ function Index() {
 
             {/* Lead Capture Form */}
             <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <div className="rounded-xl border border-gold/20 bg-card/80 backdrop-blur-sm p-6 sm:p-8 shadow-2xl shadow-black/30">
-                <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
+              <div className="rounded-xl border border-gold/20 bg-card/80 backdrop-blur-sm p-5 sm:p-6 shadow-2xl shadow-black/30">
+                <h2 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-1">
                   Find Your <span className="text-gold">Dream Home</span>
                 </h2>
-                <p className="text-sm text-muted-foreground mb-6">
-                  Tell us what you&apos;re looking for and {AGENT_NAME} will curate listings just for you.
+                <p className="text-xs text-muted-foreground mb-4">
+                  {AGENT_NAME} will curate listings just for you.
                 </p>
                 {formSubmitted ? (
-                  <div className="text-center py-8">
-                    <div className="mx-auto h-14 w-14 rounded-full bg-gold/20 flex items-center justify-center mb-4">
-                      <Star className="h-7 w-7 text-gold" />
+                  <div className="text-center py-6">
+                    <div className="mx-auto h-12 w-12 rounded-full bg-gold/20 flex items-center justify-center mb-3">
+                      <Star className="h-6 w-6 text-gold" />
                     </div>
-                    <h3 className="font-display text-xl font-bold text-foreground mb-2">
+                    <h3 className="font-display text-lg font-bold text-foreground mb-1">
                       Request Received!
                     </h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       {AGENT_NAME} will contact you within 24 hours.
                     </p>
                   </div>
                 ) : (
-                  <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <form onSubmit={handleFormSubmit} className="space-y-3">
                     <div>
-                      <label className="block text-xs font-medium text-foreground/80 mb-1.5">
+                      <label className="block text-xs font-medium text-foreground/80 mb-1">
                         Full Name
                       </label>
                       <input
@@ -189,13 +188,13 @@ function Index() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full rounded-md border border-gold/20 bg-background/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
+                        className="w-full rounded-md border border-gold/20 bg-background/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                         placeholder="John Smith"
                       />
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-medium text-foreground/80 mb-1.5">
+                        <label className="block text-xs font-medium text-foreground/80 mb-1">
                           Phone
                         </label>
                         <input
@@ -203,12 +202,12 @@ function Index() {
                           required
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full rounded-md border border-gold/20 bg-background/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
+                          className="w-full rounded-md border border-gold/20 bg-background/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                           placeholder="(561) 555-0123"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-foreground/80 mb-1.5">
+                        <label className="block text-xs font-medium text-foreground/80 mb-1">
                           Email
                         </label>
                         <input
@@ -216,52 +215,52 @@ function Index() {
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full rounded-md border border-gold/20 bg-background/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
+                          className="w-full rounded-md border border-gold/20 bg-background/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                           placeholder="john@example.com"
                         />
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-medium text-foreground/80 mb-1.5">
+                        <label className="block text-xs font-medium text-foreground/80 mb-1">
                           Monthly Budget
                         </label>
                         <div className="relative">
-                          <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                          <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
                           <input
                             type="text"
                             required
                             value={formData.budget}
                             onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                            className="w-full rounded-md border border-gold/20 bg-background/50 pl-9 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
+                            className="w-full rounded-md border border-gold/20 bg-background/50 pl-8 pr-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                             placeholder="5,000+"
                           />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-foreground/80 mb-1.5">
+                        <label className="block text-xs font-medium text-foreground/80 mb-1">
                           Move-in Date
                         </label>
                         <div className="relative">
-                          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
                           <input
                             type="date"
                             required
                             value={formData.moveIn}
                             onChange={(e) => setFormData({ ...formData, moveIn: e.target.value })}
-                            className="w-full rounded-md border border-gold/20 bg-background/50 pl-9 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
+                            className="w-full rounded-md border border-gold/20 bg-background/50 pl-8 pr-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                           />
                         </div>
                       </div>
                     </div>
                     <button
                       type="submit"
-                      className="w-full rounded-md bg-gold px-6 py-3 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25 flex items-center justify-center gap-2"
+                      className="w-full rounded-md bg-gold px-5 py-2.5 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25 flex items-center justify-center gap-2"
                     >
                       <Search className="h-4 w-4" />
                       Get Personalized Listings
                     </button>
-                    <p className="text-xs text-center text-muted-foreground">
+                    <p className="text-[10px] text-center text-muted-foreground">
                       Your information is secure. We respect your privacy.
                     </p>
                   </form>
