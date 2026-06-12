@@ -352,37 +352,7 @@ function Index() {
       {/* About Us Section */}
       <section id="about" className="py-8 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden border border-gold/20 max-h-[280px]">
-                <img
-                  src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80"
-                  alt="Luxury waterfront estate in Palm Beach"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-4 -right-4 sm:right-6 rounded-lg border border-gold/20 bg-card p-4 shadow-xl shadow-black/30 max-w-[220px]">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="h-8 w-8 rounded-full bg-gold/20 flex items-center justify-center">
-                    <Star className="h-4 w-4 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-base font-display font-bold text-foreground">15+</p>
-                    <p className="text-[10px] text-muted-foreground">Years Experience</p>
-                  </div>
-                </div>
-                <div className="h-px bg-gold/10 mb-2" />
-                <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-gold/20 flex items-center justify-center">
-                    <Users className="h-4 w-4 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-base font-display font-bold text-foreground">500+</p>
-                    <p className="text-[10px] text-muted-foreground">Clients Served</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="max-w-3xl mx-auto text-center">
             <div>
               <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-2 block">
                 About {AGENT_NAME}
