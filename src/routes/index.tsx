@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Luxury residential rentals in Palm Beach County with Paul Schafranick. Waterfront estates, gated communities, and premier high-rise living in Boca Bridges, Seven Bridges, Vista Blue, and more.",
+          "Luxury rentals in Palm Beach County with Paul Schafranick — waterfront estates, gated communities, and high-rise living.",
       },
       {
         property: "og:title",
@@ -34,9 +34,50 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Luxury residential rentals in Palm Beach County. Waterfront estates, gated communities, and premier high-rise living.",
+          "Luxury rentals in Palm Beach County — waterfront estates, gated communities, and high-rise living.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://palmbeachrentalpros.lovable.app/" },
+      { property: "og:site_name", content: "Palm Beach Rental Pros" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Palm Beach Rental Pros | Luxury Residential Rentals" },
+      {
+        name: "twitter:description",
+        content:
+          "Luxury rentals in Palm Beach County — waterfront estates, gated communities, and high-rise living.",
+      },
+    ],
+    links: [
+      { rel: "canonical", href: "https://palmbeachrentalpros.lovable.app/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "RealEstateAgent",
+          name: "Palm Beach Rental Pros",
+          description:
+            "Boutique luxury residential rental consultancy serving Palm Beach County.",
+          telephone: "+1-561-255-7285",
+          url: "https://palmbeachrentalpros.lovable.app/",
+          areaServed: "Palm Beach County, FL",
+          employee: {
+            "@type": "Person",
+            name: "Paul Schafranick",
+            telephone: "+1-561-255-7285",
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Palm Beach Rental Pros",
+          url: "https://palmbeachrentalpros.lovable.app/",
+        }),
+      },
     ],
   }),
   component: Index,
@@ -75,6 +116,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
+      <main>
       {/* Top Brand Bar — sole identifier, no nav */}
       <div className="w-full border-b border-gold/20 bg-navy/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
@@ -563,6 +605,7 @@ function Index() {
           </div>
         </div>
       </footer>
+      </main>
     </div>
   );
 }
