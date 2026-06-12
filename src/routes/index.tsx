@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Luxury residential rentals in Palm Beach County with Paul Schafranick. Waterfront estates, golf communities, and premier high-rise living in Boca Bridges, Seven Bridges, Vista Blue, and more.",
+          "Luxury residential rentals in Palm Beach County with Paul Schafranick. Waterfront estates, gated communities, and premier high-rise living in Boca Bridges, Seven Bridges, Vista Blue, and more.",
       },
       {
         property: "og:title",
