@@ -116,6 +116,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
+      <main>
       {/* Top Brand Bar — sole identifier, no nav */}
       <div className="w-full border-b border-gold/20 bg-navy/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
