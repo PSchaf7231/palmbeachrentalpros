@@ -272,18 +272,18 @@ function Index() {
       </section>
 
       {/* IDX Embed Placeholder */}
-      <section id="listings" className="py-16 sm:py-20">
+      <section id="listings" className="py-8 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-3">
+          <div className="text-center mb-6">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
               Featured <span className="text-gold">Listings</span>
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
               Browse our curated selection of luxury rentals, updated in real-time.
             </p>
           </div>
           <div className="rounded-xl border border-gold/30 bg-card p-1 shadow-lg shadow-black/20">
-            <div className="relative rounded-lg border border-gold/20 bg-navy/50 min-h-[500px] flex items-center justify-center p-8">
+            <div className="relative rounded-lg border border-gold/20 bg-navy/50 min-h-[320px] flex items-center justify-center p-6">
               <div
                 dangerouslySetInnerHTML={{
                   __html:
@@ -291,11 +291,11 @@ function Index() {
                 }}
               />
               <div className="text-center">
-                <Search className="h-12 w-12 text-gold/40 mx-auto mb-4" />
-                <p className="text-lg font-display font-semibold text-foreground/60 mb-2">
+                <Search className="h-10 w-10 text-gold/40 mx-auto mb-3" />
+                <p className="text-base font-display font-semibold text-foreground/60 mb-1">
                   IDX Widget Placeholder
                 </p>
-                <p className="text-sm text-muted-foreground max-w-md">
+                <p className="text-xs text-muted-foreground max-w-md">
                   BoldTrail filtered rental IDX embed will render here.
                   Filter preset: Residential Rentals $2,500+.
                 </p>
@@ -306,42 +306,41 @@ function Index() {
       </section>
 
       {/* Communities Section */}
-      <section id="communities" className="py-16 sm:py-20 bg-navy-light/30">
+      <section id="communities" className="py-8 sm:py-10 bg-navy-light/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-3 block">
+          <div className="text-center mb-6">
+            <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-2 block">
               Neighborhood Expertise
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-3">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
               Communities We <span className="text-gold">Serve</span>
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Deep local knowledge of Palm Beach County&apos;s most prestigious
-              residential communities. Visit each dedicated site below.
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+              Deep local knowledge of Palm Beach County&apos;s most prestigious communities.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {communities.map((community) => (
               <a
                 key={community.name}
                 href={community.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative rounded-lg border border-gold/15 bg-card p-6 transition-all duration-300 hover:border-gold/40 hover:bg-card/80 hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/5"
+                className="group relative rounded-lg border border-gold/15 bg-card p-4 transition-all duration-300 hover:border-gold/40 hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/5"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="h-10 w-10 rounded-md bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                    <Home className="h-5 w-5 text-gold" />
+                <div className="flex items-start justify-between mb-2">
+                  <div className="h-8 w-8 rounded-md bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
+                    <Home className="h-4 w-4 text-gold" />
                   </div>
-                  <ExternalLink className="h-4 w-4 text-gold/40 group-hover:text-gold transition-all" />
+                  <ExternalLink className="h-3.5 w-3.5 text-gold/40 group-hover:text-gold transition-all" />
                 </div>
-                <h3 className="font-display text-lg font-semibold text-foreground mb-1">
+                <h3 className="font-display text-sm font-semibold text-foreground mb-0.5">
                   {community.name}
                 </h3>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
+                <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">
                   {community.type}
                 </p>
-                <p className="text-xs text-gold/70 font-medium truncate">
+                <p className="text-[10px] text-gold/70 font-medium truncate">
                   {community.url.replace("https://", "")}
                 </p>
               </a>
@@ -351,71 +350,69 @@ function Index() {
       </section>
 
       {/* About Us Section */}
-      <section id="about" className="py-16 sm:py-20">
+      <section id="about" className="py-8 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="relative">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden border border-gold/20">
+              <div className="aspect-[4/3] rounded-xl overflow-hidden border border-gold/20 max-h-[280px]">
                 <img
                   src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80"
                   alt="Luxury waterfront estate in Palm Beach"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 sm:right-8 rounded-xl border border-gold/20 bg-card p-6 shadow-xl shadow-black/30 max-w-[260px]">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="h-10 w-10 rounded-full bg-gold/20 flex items-center justify-center">
-                    <Star className="h-5 w-5 text-gold" />
+              <div className="absolute -bottom-4 -right-4 sm:right-6 rounded-lg border border-gold/20 bg-card p-4 shadow-xl shadow-black/30 max-w-[220px]">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-8 w-8 rounded-full bg-gold/20 flex items-center justify-center">
+                    <Star className="h-4 w-4 text-gold" />
                   </div>
                   <div>
-                    <p className="text-lg font-display font-bold text-foreground">15+</p>
-                    <p className="text-xs text-muted-foreground">Years Experience</p>
+                    <p className="text-base font-display font-bold text-foreground">15+</p>
+                    <p className="text-[10px] text-muted-foreground">Years Experience</p>
                   </div>
                 </div>
-                <div className="h-px bg-gold/10 mb-3" />
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-gold/20 flex items-center justify-center">
-                    <Users className="h-5 w-5 text-gold" />
+                <div className="h-px bg-gold/10 mb-2" />
+                <div className="flex items-center gap-2">
+                  <div className="h-8 w-8 rounded-full bg-gold/20 flex items-center justify-center">
+                    <Users className="h-4 w-4 text-gold" />
                   </div>
                   <div>
-                    <p className="text-lg font-display font-bold text-foreground">500+</p>
-                    <p className="text-xs text-muted-foreground">Clients Served</p>
+                    <p className="text-base font-display font-bold text-foreground">500+</p>
+                    <p className="text-[10px] text-muted-foreground">Clients Served</p>
                   </div>
                 </div>
               </div>
             </div>
             <div>
-              <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-3 block">
+              <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-2 block">
                 About {AGENT_NAME}
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-6">
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-4">
                 Your Trusted Partner in <span className="text-gold">Luxury Rentals</span>
               </h2>
-              <p className="text-foreground/70 mb-4 leading-relaxed">
+              <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
                 Palm Beach Rental Pros is a boutique luxury rental consultancy
                 specializing in the most sought-after residential communities
                 across Palm Beach County. From waterfront estates in Boca Raton
                 to premier high-rise living in West Palm Beach, {AGENT_NAME}
                 connects discerning clients with exceptional properties.
               </p>
-              <p className="text-foreground/70 mb-6 leading-relaxed">
+              <p className="text-sm text-foreground/70 mb-4 leading-relaxed">
                 White-glove service includes personalized property tours, lease
-                negotiation, and ongoing tenant advocacy. Finding the right home
-                is about more than square footage — it&apos;s about lifestyle,
-                community, and peace of mind.
+                negotiation, and ongoing tenant advocacy.
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 {[
                   { icon: Shield, label: "Licensed & Insured" },
                   { icon: Key, label: "Exclusive Access" },
                   { icon: Clock, label: "24/7 Support" },
                   { icon: MapPin, label: "Local Experts" },
                 ].map((item) => (
-                  <div key={item.label} className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-md bg-gold/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="h-4 w-4 text-gold" />
+                  <div key={item.label} className="flex items-center gap-2">
+                    <div className="h-7 w-7 rounded-md bg-gold/10 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="h-3.5 w-3.5 text-gold" />
                     </div>
-                    <span className="text-sm font-medium text-foreground/80">
+                    <span className="text-xs font-medium text-foreground/80">
                       {item.label}
                     </span>
                   </div>
@@ -427,49 +424,48 @@ function Index() {
       </section>
 
       {/* Property Management Section */}
-      <section id="management" className="py-16 sm:py-20 bg-navy-light/30">
+      <section id="management" className="py-8 sm:py-10 bg-navy-light/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-3 block">
+          <div className="text-center mb-6">
+            <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-2 block">
               Full-Service Solutions
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-3">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
               Property <span className="text-gold">Management</span>
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Comprehensive management services for property owners seeking
-              maximum return and minimal hassle.
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+              Comprehensive management services for property owners.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               {
                 icon: Search,
                 title: "Tenant Placement",
-                desc: "Rigorous screening and vetting to secure qualified, long-term tenants for your investment property.",
+                desc: "Rigorous screening and vetting to secure qualified, long-term tenants.",
               },
               {
                 icon: Shield,
                 title: "Asset Protection",
-                desc: "Proactive maintenance, inspections, and compliance management to preserve and enhance property value.",
+                desc: "Proactive maintenance and compliance to preserve property value.",
               },
               {
                 icon: DollarSign,
                 title: "Revenue Optimization",
-                desc: "Dynamic pricing strategies and lease structuring designed to maximize your rental income.",
+                desc: "Dynamic pricing and lease structuring to maximize rental income.",
               },
             ].map((service) => (
               <div
                 key={service.title}
-                className="rounded-xl border border-gold/15 bg-card p-8 transition-all duration-300 hover:border-gold/30 hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/5"
+                className="rounded-lg border border-gold/15 bg-card p-5 transition-all duration-300 hover:border-gold/30 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/5"
               >
-                <div className="h-12 w-12 rounded-lg bg-gold/10 flex items-center justify-center mb-6">
-                  <service.icon className="h-6 w-6 text-gold" />
+                <div className="h-9 w-9 rounded-lg bg-gold/10 flex items-center justify-center mb-3">
+                  <service.icon className="h-5 w-5 text-gold" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-3">
+                <h3 className="font-display text-base font-semibold text-foreground mb-1.5">
                   {service.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {service.desc}
                 </p>
               </div>
@@ -479,27 +475,27 @@ function Index() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 relative overflow-hidden">
+      <section className="py-8 sm:py-10 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-gold/10 via-transparent to-gold/5" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3">
             Ready to Find Your <span className="text-gold">Perfect Home</span>?
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mb-8">
+          <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-6">
             {AGENT_NAME} is standing by to help you discover the finest
             properties Palm Beach County has to offer.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3">
             <a
               href={`tel:${AGENT_PHONE_TEL}`}
-              className="inline-flex items-center gap-2 rounded-md bg-gold px-8 py-3.5 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
+              className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-2.5 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
             >
               <Phone className="h-4 w-4" />
               Call {AGENT_PHONE_DISPLAY}
             </a>
             <a
               href="mailto:paul@palmbeachrentalpros.com"
-              className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-8 py-3.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
+              className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-6 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
             >
               <Mail className="h-4 w-4" />
               Email Paul
@@ -509,33 +505,32 @@ function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gold/10 bg-navy-light/20 pt-16 pb-8">
+      <footer className="border-t border-gold/10 bg-navy-light/20 pt-10 pb-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Building2 className="h-6 w-6 text-gold" />
-                <span className="font-display text-lg font-semibold text-foreground">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            <div className="col-span-2 md:col-span-1">
+              <div className="flex items-center gap-2 mb-3">
+                <Building2 className="h-5 w-5 text-gold" />
+                <span className="font-display text-base font-semibold text-foreground">
                   Palm Beach <span className="text-gold">Rental</span> Pros
                 </span>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              <p className="text-xs text-muted-foreground leading-relaxed mb-3">
                 Palm Beach County&apos;s premier luxury rental specialists.
-                Connecting discerning clients with exceptional homes.
               </p>
             </div>
             <div>
-              <h4 className="font-display text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
+              <h4 className="font-display text-xs font-semibold text-foreground uppercase tracking-wider mb-3">
                 Communities
               </h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-1.5">
                 {communities.map((c) => (
                   <li key={c.name}>
                     <a
                       href={c.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-muted-foreground hover:text-gold transition-colors"
+                      className="text-xs text-muted-foreground hover:text-gold transition-colors"
                     >
                       {c.name}
                     </a>
@@ -544,10 +539,10 @@ function Index() {
               </ul>
             </div>
             <div>
-              <h4 className="font-display text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
+              <h4 className="font-display text-xs font-semibold text-foreground uppercase tracking-wider mb-3">
                 Services
               </h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-1.5">
                 {[
                   "Luxury Rentals",
                   "Property Management",
@@ -556,43 +551,43 @@ function Index() {
                   "Market Analysis",
                 ].map((s) => (
                   <li key={s}>
-                    <span className="text-sm text-muted-foreground">{s}</span>
+                    <span className="text-xs text-muted-foreground">{s}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h4 className="font-display text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
+              <h4 className="font-display text-xs font-semibold text-foreground uppercase tracking-wider mb-3">
                 Contact
               </h4>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <Users className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-muted-foreground">{AGENT_NAME}</span>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-2">
+                  <Users className="h-3.5 w-3.5 text-gold mt-0.5 flex-shrink-0" />
+                  <span className="text-xs text-muted-foreground">{AGENT_NAME}</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <Phone className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
+                <li className="flex items-start gap-2">
+                  <Phone className="h-3.5 w-3.5 text-gold mt-0.5 flex-shrink-0" />
                   <a
                     href={`tel:${AGENT_PHONE_TEL}`}
-                    className="text-sm text-muted-foreground hover:text-gold transition-colors"
+                    className="text-xs text-muted-foreground hover:text-gold transition-colors"
                   >
                     {AGENT_PHONE_DISPLAY}
                   </a>
                 </li>
-                <li className="flex items-start gap-3">
-                  <MapPin className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <MapPin className="h-3.5 w-3.5 text-gold mt-0.5 flex-shrink-0" />
+                  <span className="text-xs text-muted-foreground">
                     Palm Beach County, FL
                   </span>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gold/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-muted-foreground">
+          <div className="border-t border-gold/10 pt-5 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p className="text-[10px] text-muted-foreground">
               &copy; {new Date().getFullYear()} Palm Beach Rental Pros. All rights reserved.
             </p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-[10px] text-muted-foreground">
               Licensed Real Estate Professional in the State of Florida
             </p>
           </div>
