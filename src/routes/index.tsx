@@ -1,15 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import {
-  Menu,
-  X,
   Phone,
   Mail,
   MapPin,
   Home,
   Building2,
   Star,
-  ChevronRight,
   ArrowRight,
   Shield,
   Key,
@@ -18,25 +15,26 @@ import {
   Search,
   DollarSign,
   Calendar,
+  ExternalLink,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Palm Beach Real Estate Pros | Luxury Rentals" },
+      { title: "Palm Beach Rental Pros | Luxury Residential Rentals" },
       {
         name: "description",
         content:
-          "Discover luxury residential rentals in Palm Beach County. Waterfront estates, golf communities, and premier high-rise living. Specializing in Boca Bridges, Seven Bridges, Vista Blue, and more.",
+          "Luxury residential rentals in Palm Beach County with Paul Schafranick. Waterfront estates, golf communities, and premier high-rise living in Boca Bridges, Seven Bridges, Vista Blue, and more.",
       },
       {
         property: "og:title",
-        content: "Palm Beach Real Estate Pros | Luxury Rentals",
+        content: "Palm Beach Rental Pros | Luxury Residential Rentals",
       },
       {
         property: "og:description",
         content:
-          "Discover luxury residential rentals in Palm Beach County. Waterfront estates, golf communities, and premier high-rise living.",
+          "Luxury residential rentals in Palm Beach County. Waterfront estates, golf communities, and premier high-rise living.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -45,27 +43,20 @@ export const Route = createFileRoute("/")({
 });
 
 const communities = [
-  { name: "Two City Plaza", type: "High-Rise" },
-  { name: "Water Club", type: "Waterfront" },
-  { name: "Alton", type: "Town Center" },
-  { name: "Vista Blue", type: "Golf Community" },
-  { name: "Seven Bridges", type: "Golf Community" },
-  { name: "Boca Bridges", type: "Golf Community" },
-  { name: "The Bristol", type: "Luxury High-Rise" },
+  { name: "Two City Plaza", type: "High-Rise", url: "https://twocityplazapb.com" },
+  { name: "Water Club", type: "Waterfront", url: "https://waterclublivingpb.com" },
+  { name: "Alton", type: "Town Center", url: "https://altonpb.com" },
+  { name: "Vista Blue", type: "Golf Community", url: "https://vistabluepb.com" },
+  { name: "Seven Bridges", type: "Golf Community", url: "https://sevenbridgespb.com" },
+  { name: "Boca Bridges", type: "Golf Community", url: "https://bocabridgespb.com" },
+  { name: "The Bristol", type: "Luxury High-Rise", url: "https://thebristolpb.com" },
 ];
 
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Listings", href: "#listings" },
-  { label: "Communities", href: "#communities" },
-  { label: "About", href: "#about" },
-  { label: "Property Management", href: "#management" },
-  { label: "Contact", href: "#contact" },
-];
+const AGENT_NAME = "Paul Schafranick";
+const AGENT_PHONE_DISPLAY = "561-255-7285";
+const AGENT_PHONE_TEL = "5612557285";
 
 function Index() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -74,20 +65,6 @@ function Index() {
     moveIn: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollTo = (href: string) => {
-    setMobileMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,110 +75,35 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
-      {/* Header */}
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-navy/95 backdrop-blur-md border-b border-gold/20 shadow-lg shadow-black/20"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+      {/* Top Brand Bar — sole identifier, no nav */}
+      <div className="w-full border-b border-gold/20 bg-navy/95 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+          <div className="flex items-center gap-2">
+            <Building2 className="h-6 w-6 text-gold" />
+            <span className="font-display text-lg sm:text-xl font-semibold tracking-wide">
+              Palm Beach <span className="text-gold">Rental</span> Pros
+            </span>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4 text-sm">
+            <span className="text-foreground/80 font-medium">{AGENT_NAME}</span>
             <a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollTo("#home");
-              }}
-              className="flex items-center gap-2"
+              href={`tel:${AGENT_PHONE_TEL}`}
+              className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light font-semibold transition-colors"
             >
-              <Building2 className="h-7 w-7 text-gold" />
-              <span className="font-display text-lg sm:text-xl font-semibold text-foreground tracking-wide">
-                Palm Beach <span className="text-gold">Real Estate</span> Pros
-              </span>
+              <Phone className="h-4 w-4" />
+              {AGENT_PHONE_DISPLAY}
             </a>
-
-            <nav className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo(link.href);
-                  }}
-                  className="text-sm font-medium text-foreground/80 hover:text-gold transition-colors duration-200 tracking-wide uppercase"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollTo("#contact");
-                }}
-                className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/20"
-              >
-                <Phone className="h-4 w-4" />
-                Get Started
-              </a>
-            </nav>
-
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-gold hover:text-gold-light transition-colors"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-navy-light border-b border-gold/20 animate-fade-in">
-            <div className="px-4 py-6 space-y-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo(link.href);
-                  }}
-                  className="block text-base font-medium text-foreground/80 hover:text-gold transition-colors py-2"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollTo("#contact");
-                }}
-                className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-3 text-sm font-semibold text-navy w-full justify-center mt-4"
-              >
-                <Phone className="h-4 w-4" />
-                Get Started
-              </a>
-            </div>
-          </div>
-        )}
-      </header>
-
-      {/* Hero Section */}
-      <section
-        id="home"
-        className="relative min-h-screen flex items-center pt-20 overflow-hidden"
-      >
+      {/* Hero */}
+      <section className="relative flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80')] bg-cover bg-center opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="animate-fade-in-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 mb-6">
@@ -223,10 +125,6 @@ function Index() {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="#listings"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo("#listings");
-                  }}
                   className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3 text-sm font-semibold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
                 >
                   <Search className="h-4 w-4" />
@@ -234,15 +132,11 @@ function Index() {
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo("#contact");
-                  }}
+                  href={`tel:${AGENT_PHONE_TEL}`}
                   className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-6 py-3 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
                 >
                   <Phone className="h-4 w-4" />
-                  Speak with an Agent
+                  Call {AGENT_PHONE_DISPLAY}
                 </a>
               </div>
               <div className="mt-10 flex items-center gap-6">
@@ -270,8 +164,7 @@ function Index() {
                   Find Your <span className="text-gold">Dream Home</span>
                 </h2>
                 <p className="text-sm text-muted-foreground mb-6">
-                  Tell us what you&apos;re looking for and our specialists will
-                  curate listings just for you.
+                  Tell us what you&apos;re looking for and {AGENT_NAME} will curate listings just for you.
                 </p>
                 {formSubmitted ? (
                   <div className="text-center py-8">
@@ -282,7 +175,7 @@ function Index() {
                       Request Received!
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      A luxury specialist will contact you within 24 hours.
+                      {AGENT_NAME} will contact you within 24 hours.
                     </p>
                   </div>
                 ) : (
@@ -295,9 +188,7 @@ function Index() {
                         type="text"
                         required
                         value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full rounded-md border border-gold/20 bg-background/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                         placeholder="John Smith"
                       />
@@ -311,9 +202,7 @@ function Index() {
                           type="tel"
                           required
                           value={formData.phone}
-                          onChange={(e) =>
-                            setFormData({ ...formData, phone: e.target.value })
-                          }
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           className="w-full rounded-md border border-gold/20 bg-background/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                           placeholder="(561) 555-0123"
                         />
@@ -326,9 +215,7 @@ function Index() {
                           type="email"
                           required
                           value={formData.email}
-                          onChange={(e) =>
-                            setFormData({ ...formData, email: e.target.value })
-                          }
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           className="w-full rounded-md border border-gold/20 bg-background/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                           placeholder="john@example.com"
                         />
@@ -345,9 +232,7 @@ function Index() {
                             type="text"
                             required
                             value={formData.budget}
-                            onChange={(e) =>
-                              setFormData({ ...formData, budget: e.target.value })
-                            }
+                            onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                             className="w-full rounded-md border border-gold/20 bg-background/50 pl-9 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                             placeholder="5,000+"
                           />
@@ -363,9 +248,7 @@ function Index() {
                             type="date"
                             required
                             value={formData.moveIn}
-                            onChange={(e) =>
-                              setFormData({ ...formData, moveIn: e.target.value })
-                            }
+                            onChange={(e) => setFormData({ ...formData, moveIn: e.target.value })}
                             className="w-full rounded-md border border-gold/20 bg-background/50 pl-9 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
                           />
                         </div>
@@ -401,15 +284,14 @@ function Index() {
             </p>
           </div>
           <div className="rounded-xl border border-gold/30 bg-card p-1 shadow-lg shadow-black/20">
-            <div className="rounded-lg border border-gold/20 bg-navy/50 min-h-[500px] flex items-center justify-center p-8">
+            <div className="relative rounded-lg border border-gold/20 bg-navy/50 min-h-[500px] flex items-center justify-center p-8">
               <div
-                className="text-center"
                 dangerouslySetInnerHTML={{
                   __html:
                     '<!-- BOLDTRAIL FILTERED RENTAL IDX EMBED WIDGET GOES HERE - FILTER SET TO RESIDENTIAL RENTALS $2,500+ -->',
                 }}
               />
-              <div className="absolute text-center">
+              <div className="text-center">
                 <Search className="h-12 w-12 text-gold/40 mx-auto mb-4" />
                 <p className="text-lg font-display font-semibold text-foreground/60 mb-2">
                   IDX Widget Placeholder
@@ -436,29 +318,34 @@ function Index() {
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
               Deep local knowledge of Palm Beach County&apos;s most prestigious
-              residential communities.
+              residential communities. Visit each dedicated site below.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {communities.map((community, i) => (
-              <div
+            {communities.map((community) => (
+              <a
                 key={community.name}
+                href={community.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative rounded-lg border border-gold/15 bg-card p-6 transition-all duration-300 hover:border-gold/40 hover:bg-card/80 hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/5"
-                style={{ animationDelay: `${i * 0.05}s` }}
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="h-10 w-10 rounded-md bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                     <Home className="h-5 w-5 text-gold" />
                   </div>
-                  <ChevronRight className="h-5 w-5 text-gold/40 group-hover:text-gold group-hover:translate-x-1 transition-all" />
+                  <ExternalLink className="h-4 w-4 text-gold/40 group-hover:text-gold transition-all" />
                 </div>
                 <h3 className="font-display text-lg font-semibold text-foreground mb-1">
                   {community.name}
                 </h3>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
                   {community.type}
                 </p>
-              </div>
+                <p className="text-xs text-gold/70 font-medium truncate">
+                  {community.url.replace("https://", "")}
+                </p>
+              </a>
             ))}
           </div>
         </div>
@@ -500,23 +387,23 @@ function Index() {
             </div>
             <div>
               <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-3 block">
-                About Us
+                About {AGENT_NAME}
               </span>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-6">
                 Your Trusted Partner in <span className="text-gold">Luxury Rentals</span>
               </h2>
               <p className="text-foreground/70 mb-4 leading-relaxed">
-                Palm Beach Real Estate Pros is a boutique luxury rental
-                consultancy specializing in the most sought-after residential
-                communities across Palm Beach County. From waterfront estates in
-                Boca Raton to premier high-rise living in West Palm Beach, we
-                connect discerning clients with exceptional properties.
+                Palm Beach Rental Pros is a boutique luxury rental consultancy
+                specializing in the most sought-after residential communities
+                across Palm Beach County. From waterfront estates in Boca Raton
+                to premier high-rise living in West Palm Beach, {AGENT_NAME}
+                connects discerning clients with exceptional properties.
               </p>
               <p className="text-foreground/70 mb-6 leading-relaxed">
-                Our white-glove service includes personalized property tours,
-                lease negotiation, and ongoing tenant advocacy. We understand
-                that finding the right home is about more than square footage —
-                it&apos;s about lifestyle, community, and peace of mind.
+                White-glove service includes personalized property tours, lease
+                negotiation, and ongoing tenant advocacy. Finding the right home
+                is about more than square footage — it&apos;s about lifestyle,
+                community, and peace of mind.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {[
@@ -592,7 +479,7 @@ function Index() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="py-16 sm:py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-gold/10 via-transparent to-gold/5" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
@@ -600,67 +487,43 @@ function Index() {
             Ready to Find Your <span className="text-gold">Perfect Home</span>?
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto mb-8">
-            Our luxury rental specialists are standing by to help you discover
-            the finest properties Palm Beach County has to offer.
+            {AGENT_NAME} is standing by to help you discover the finest
+            properties Palm Beach County has to offer.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollTo("#contact");
-              }}
+              href={`tel:${AGENT_PHONE_TEL}`}
               className="inline-flex items-center gap-2 rounded-md bg-gold px-8 py-3.5 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
             >
               <Phone className="h-4 w-4" />
-              Call (561) 555-0199
+              Call {AGENT_PHONE_DISPLAY}
             </a>
             <a
-              href="mailto:info@palmbeachrealestatepros.com"
+              href="mailto:paul@palmbeachrentalpros.com"
               className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-8 py-3.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
             >
               <Mail className="h-4 w-4" />
-              Email Us
+              Email Paul
             </a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="border-t border-gold/10 bg-navy-light/20 pt-16 pb-8">
+      <footer className="border-t border-gold/10 bg-navy-light/20 pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Building2 className="h-6 w-6 text-gold" />
                 <span className="font-display text-lg font-semibold text-foreground">
-                  Palm Beach <span className="text-gold">Real Estate</span> Pros
+                  Palm Beach <span className="text-gold">Rental</span> Pros
                 </span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                Palm Beach County&apos;s premier luxury rental specialists. Connecting
-                discerning clients with exceptional homes since 2009.
+                Palm Beach County&apos;s premier luxury rental specialists.
+                Connecting discerning clients with exceptional homes.
               </p>
-              <div className="flex items-center gap-4">
-                <a href="#" className="text-gold/60 hover:text-gold transition-colors">
-                  <span className="sr-only">Facebook</span>
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                  </svg>
-                </a>
-                <a href="#" className="text-gold/60 hover:text-gold transition-colors">
-                  <span className="sr-only">Instagram</span>
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                  </svg>
-                </a>
-                <a href="#" className="text-gold/60 hover:text-gold transition-colors">
-                  <span className="sr-only">LinkedIn</span>
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                </a>
-              </div>
             </div>
             <div>
               <h4 className="font-display text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
@@ -670,11 +533,9 @@ function Index() {
                 {communities.map((c) => (
                   <li key={c.name}>
                     <a
-                      href="#communities"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        scrollTo("#communities");
-                      }}
+                      href={c.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-sm text-muted-foreground hover:text-gold transition-colors"
                     >
                       {c.name}
@@ -688,13 +549,17 @@ function Index() {
                 Services
               </h4>
               <ul className="space-y-2.5">
-                {["Luxury Rentals", "Property Management", "Tenant Placement", "Investment Consulting", "Market Analysis"].map(
-                  (s) => (
-                    <li key={s}>
-                      <span className="text-sm text-muted-foreground">{s}</span>
-                    </li>
-                  )
-                )}
+                {[
+                  "Luxury Rentals",
+                  "Property Management",
+                  "Tenant Placement",
+                  "Investment Consulting",
+                  "Market Analysis",
+                ].map((s) => (
+                  <li key={s}>
+                    <span className="text-sm text-muted-foreground">{s}</span>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
@@ -703,21 +568,22 @@ function Index() {
               </h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
-                  <Phone className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-muted-foreground">(561) 555-0199</span>
+                  <Users className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-muted-foreground">{AGENT_NAME}</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Mail className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-muted-foreground">
-                    info@palmbeachrealestatepros.com
-                  </span>
+                  <Phone className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
+                  <a
+                    href={`tel:${AGENT_PHONE_TEL}`}
+                    className="text-sm text-muted-foreground hover:text-gold transition-colors"
+                  >
+                    {AGENT_PHONE_DISPLAY}
+                  </a>
                 </li>
                 <li className="flex items-start gap-3">
                   <MapPin className="h-4 w-4 text-gold mt-0.5 flex-shrink-0" />
                   <span className="text-sm text-muted-foreground">
-                    150 E Palmetto Park Rd
-                    <br />
-                    Boca Raton, FL 33432
+                    Palm Beach County, FL
                   </span>
                 </li>
               </ul>
@@ -725,11 +591,10 @@ function Index() {
           </div>
           <div className="border-t border-gold/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-muted-foreground">
-              &copy; {new Date().getFullYear()} Palm Beach Real Estate Pros. All rights
-              reserved.
+              &copy; {new Date().getFullYear()} Palm Beach Rental Pros. All rights reserved.
             </p>
             <p className="text-xs text-muted-foreground">
-              Licensed Real Estate Brokerage in the State of Florida
+              Licensed Real Estate Professional in the State of Florida
             </p>
           </div>
         </div>
