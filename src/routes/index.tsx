@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Luxury residential rentals in Palm Beach County. Waterfront estates, golf communities, and premier high-rise living.",
+          "Luxury residential rentals in Palm Beach County. Waterfront estates, gated communities, and premier high-rise living.",
       },
       { property: "og:type", content: "website" },
     ],
