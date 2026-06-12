@@ -4,7 +4,7 @@ export const Route = createFileRoute("/sitemap/xml")({
   server: {
     handlers: {
       GET: async () => {
-        const baseUrl = "https://palmbeachrealestatepros.com";
+        const baseUrl = "https://palmbeachrentalpros.lovable.app";
         const now = new Date().toISOString();
 
         const pages = [
