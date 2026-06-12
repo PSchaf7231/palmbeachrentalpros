@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Luxury residential rentals in Palm Beach County with Paul Schafranick. Waterfront estates, golf communities, and premier high-rise living in Boca Bridges, Seven Bridges, Vista Blue, and more.",
+          "Luxury residential rentals in Palm Beach County with Paul Schafranick. Waterfront estates, gated communities, and premier high-rise living in Boca Bridges, Seven Bridges, Vista Blue, and more.",
       },
       {
         property: "og:title",
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Luxury residential rentals in Palm Beach County. Waterfront estates, golf communities, and premier high-rise living.",
+          "Luxury residential rentals in Palm Beach County. Waterfront estates, gated communities, and premier high-rise living.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -43,12 +43,12 @@ export const Route = createFileRoute("/")({
 });
 
 const communities = [
-  { name: "Two City Plaza", type: "High-Rise", url: "https://twocityplazapb.com" },
-  { name: "Water Club", type: "Waterfront", url: "https://waterclublivingpb.com" },
-  { name: "Alton", type: "Town Center", url: "https://altonpb.com" },
-  { name: "Vista Blue", type: "Golf Community", url: "https://vistabluepb.com" },
-  { name: "Seven Bridges", type: "Golf Community", url: "https://sevenbridgespb.com" },
-  { name: "Boca Bridges", type: "Golf Community", url: "https://bocabridgespb.com" },
+  { name: "Two City Plaza", type: "Luxury High-Rise", url: "https://twocityplazapb.com" },
+  { name: "Water Club", type: "Waterfront Condo", url: "https://waterclublivingpb.com" },
+  { name: "Alton", type: "Master-Planned Community", url: "https://altonpb.com" },
+  { name: "Vista Blue", type: "Oceanfront Condo", url: "https://vistabluepb.com" },
+  { name: "Seven Bridges", type: "SFH Gated Community", url: "https://sevenbridgespb.com" },
+  { name: "Boca Bridges", type: "SFH Gated Community", url: "https://bocabridgespb.com" },
   { name: "The Bristol", type: "Luxury High-Rise", url: "https://thebristolpb.com" },
 ];
 
@@ -118,7 +118,7 @@ function Index() {
                 <span className="text-gold">Redefined</span> in Palm Beach
               </h1>
               <p className="text-base sm:text-lg text-foreground/70 max-w-lg mb-6 leading-relaxed">
-                Exclusive access to the finest waterfront estates, golf
+                Exclusive access to the finest waterfront estates, gated
                 communities, and premier high-rise residences.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -352,37 +352,7 @@ function Index() {
       {/* About Us Section */}
       <section id="about" className="py-8 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden border border-gold/20 max-h-[280px]">
-                <img
-                  src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80"
-                  alt="Luxury waterfront estate in Palm Beach"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-4 -right-4 sm:right-6 rounded-lg border border-gold/20 bg-card p-4 shadow-xl shadow-black/30 max-w-[220px]">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="h-8 w-8 rounded-full bg-gold/20 flex items-center justify-center">
-                    <Star className="h-4 w-4 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-base font-display font-bold text-foreground">15+</p>
-                    <p className="text-[10px] text-muted-foreground">Years Experience</p>
-                  </div>
-                </div>
-                <div className="h-px bg-gold/10 mb-2" />
-                <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-gold/20 flex items-center justify-center">
-                    <Users className="h-4 w-4 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-base font-display font-bold text-foreground">500+</p>
-                    <p className="text-[10px] text-muted-foreground">Clients Served</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="max-w-3xl mx-auto text-center">
             <div>
               <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-2 block">
                 About {AGENT_NAME}
