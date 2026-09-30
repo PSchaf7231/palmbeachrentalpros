@@ -7,6 +7,10 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // Force-enable Nitro outside Lovable so self-hosted builds produce a deployable server.
+  // Nitro auto-detects Vercel (VERCEL env var) and emits .vercel/output; inside Lovable
+  // the config package still forces its own Cloudflare target, so Lovable hosting is unaffected.
+  nitro: true,
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
