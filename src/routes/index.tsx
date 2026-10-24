@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
           "Luxury rentals in Palm Beach County — waterfront estates, gated communities, and high-rise living.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://palmbeachrentalpros.lovable.app/" },
+      { property: "og:url", content: "https://palmbeachrentalpros.com/" },
       { property: "og:site_name", content: "Palm Beach Rental Pros" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Palm Beach Rental Pros | Luxury Residential Rentals" },
@@ -48,7 +48,7 @@ export const Route = createFileRoute("/")({
       },
     ],
     links: [
-      { rel: "canonical", href: "https://palmbeachrentalpros.lovable.app/" },
+      { rel: "canonical", href: "https://palmbeachrentalpros.com/" },
     ],
     scripts: [
       {
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/")({
           description:
             "Boutique luxury residential rental consultancy serving Palm Beach County.",
           telephone: "+1-561-255-7285",
-          url: "https://palmbeachrentalpros.lovable.app/",
+          url: "https://palmbeachrentalpros.com/",
           areaServed: "Palm Beach County, FL",
           employee: {
             "@type": "Person",
@@ -75,7 +75,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "Palm Beach Rental Pros",
-          url: "https://palmbeachrentalpros.lovable.app/",
+          url: "https://palmbeachrentalpros.com/",
         }),
       },
     ],
