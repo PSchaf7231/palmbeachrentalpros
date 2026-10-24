@@ -1,19 +1,48 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
-//   - tanstackStart, viteReact, tailwindcss, tsConfigPaths, nitro (build-only using cloudflare as a default target),
-//     componentTagger (dev-only), VITE_* env injection, @ path alias, React/TanStack dedupe,
-//     error logger plugins, and sandbox detection (port/host/strictPort).
-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { nitro } from "nitro/vite";
 
-export default defineConfig({
-  // Force-enable Nitro outside Lovable so self-hosted builds produce a deployable server.
-  // Nitro auto-detects Vercel (VERCEL env var) and emits .vercel/output; inside Lovable
-  // the config package still forces its own Cloudflare target, so Lovable hosting is unaffected.
-  nitro: true,
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+// TanStack Start (SSR) + Nitro. Nitro auto-detects Vercel (the VERCEL env var) and emits
+// `.vercel/output`; locally it builds a standalone Node server into `.output/`.
+export default defineConfig(({ command }) => ({
+  resolve: {
+    dedupe: [
+      "react",
+      "react-dom",
+      "react/jsx-runtime",
+      "react/jsx-dev-runtime",
+      "@tanstack/react-query",
+      "@tanstack/query-core",
+    ],
   },
-});
+  build: {
+    rolldownOptions: {
+      // Silence harmless "use client" directive notices from third-party packages
+      // (react-query / react-router); they are meaningless in a TanStack Start SSR bundle.
+      onLog(level, log, defaultHandler) {
+        if (log.code === "MODULE_LEVEL_DIRECTIVE") return;
+        defaultHandler(level, log);
+      },
+    },
+  },
+  plugins: [
+    tailwindcss(),
+    tsconfigPaths({ projects: ["./tsconfig.json"] }),
+    tanstackStart({
+      // Use src/server.ts (our SSR error wrapper) as the server entry.
+      server: { entry: "server" },
+      importProtection: {
+        behavior: "error",
+        client: {
+          files: ["**/server/**"],
+          specifiers: ["server-only"],
+        },
+      },
+    }),
+    ...(command === "build" ? [nitro()] : []),
+    react(),
+  ],
+}));

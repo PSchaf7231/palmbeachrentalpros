@@ -1,42 +1,43 @@
 # Palm Beach Rental Pros
 
-Please build a premium, high-converting single-page landing page for a luxury residential real estate rental platform specializing in Palm Beach County. 
+Marketing / lead-capture site for [palmbeachrentalpros.com](https://palmbeachrentalpros.com).
 
-Apply these exact design and structural rules:
+**Stack:** TanStack Start (React 19, SSR) · Vite 8 · Tailwind CSS 4 · Nitro (deploys to Vercel).
 
-1. Brand & Aesthetic: Use an elite, high-end design palette featuring a deep navy blue primary background color accented with polished, elegant gold highlights for buttons, borders, and headers. Ensure clean, premium typography with sharp, spacious layout boundaries.
-
-2. Top Header: Prominently feature the branding: "Palm Beach Real Estate Pros | The Rental Collection". Include an elegant hamburger menu containing links for "About Us," "Property Management," and "Contact."
-
-3. Hero Section: A striking top section with the title "Access Palm Beach County's Elite Rental Collection." Include a subheadline: "Curated residential leases from $2,500 to $15,000+/mo in Boca Raton, Delray Beach, and premier coastal communities."
-
-4. Primary Lead Capture Form: Embed a beautifully styled, high-end input form box near the top. Fields required: Name, Phone Number, Email, Maximum Budget, and Target Move-in Date. The submission button must be an elegant gold color and read: "Get Instant Access to Listings".
-
-5. MLS/IDX Filter Area Placeholder: Create a large, clean, framed container section marked explicitly with placeholder text: "<!-- BOLDTRAIL FILTERED RENTAL IDX EMBED WIDGET GOES HERE - FILTER SET TO RESIDENTIAL RENTALS $2,500+ -->". Surround this area with thin gold border lines.
-
-6. Local Authority Badges: Include clean text cards highlighting specialized neighborhood service areas: "Boca Bridges, Seven Bridges, Vista Blue, and Premier High-Rise Developments."
-
-Make the code completely responsive for mobile screens, lightweight, and fully optimized for instant static deployment on Netlify or Vercel.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://palmbeachrentalpros.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/63b31128-a2fc-4fb7-8a84-8d020ecea8c8).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Develop
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun install
+bun run dev        # http://localhost:5173
+bun run build      # production build (Nitro; emits .vercel/output on Vercel, .output/ locally)
+bun run preview
 ```
+
+## Environment variables
+
+Copy `.env.example` to `.env` for local work. In production set them in
+Vercel → Project → Settings → Environment Variables, then redeploy.
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `GHL_WEBHOOK_URL` | **Yes** | GoHighLevel "Inbound Webhook" trigger URL. The `/api/lead` route POSTs every lead here as JSON. If it is unset in production, the form shows an error (it never fakes success). |
+| `VITE_BROKERAGE_ADDRESS` | Before launch | Brokerage street address, shown in the footer only when set. |
+| `VITE_LICENSE_NUMBER` | Before launch | Agent license #, shown in the footer only when set. |
+| `VITE_BROKERAGE_LICENSE_NUMBER` | Optional | Brokerage license #, shown in the footer only when set. |
+
+### Wiring leads to GoHighLevel
+
+1. GHL → Automation → Workflows → Create Workflow → trigger **Inbound Webhook**.
+2. Copy the webhook URL into `GHL_WEBHOOK_URL` (Vercel env, Production + Preview).
+3. Submit a test lead on the site, then in the workflow trigger click "Fetch sample requests" and map fields
+   (`first_name`, `last_name`, `phone`, `email`, `form_type`, `message`, `price_min`, `price_max`, `beds`, `areas`,
+   `move_in_date`, `sms_email_consent`, `consent_text`, `source`, `page_url`, `utm_*`).
+4. Only text leads where `sms_email_consent` is `true`.
+
+## Project notes
+
+- `src/routes/index.tsx` — home page (search placeholder, lead forms, communities, footer).
+- `src/routes/api.lead.ts` — `POST /api/lead` server route (validation, honeypot, webhook forward).
+- `src/routes/privacy.tsx`, `terms.tsx` — **draft** legal pages; have the broker/attorney review before launch.
+- `src/routes/sitemap[.]xml.ts`, `public/robots.txt` — SEO; canonical host is `https://palmbeachrentalpros.com`.
+- The IDX / rental search block is a placeholder until the BoldTrail embed is provided.
