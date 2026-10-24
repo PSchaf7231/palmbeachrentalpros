@@ -74,13 +74,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Palm Beach Rental Pros | Luxury Rentals" },
-      { name: "description", content: "Premier luxury residential rentals in Palm Beach County. Waterfront homes, gated communities, and high-rise living." },
+      { title: "Palm Beach County Luxury Rentals | Palm Beach Rental Pros" },
+      {
+        name: "description",
+        content:
+          "Search luxury rentals across Palm Beach County: waterfront condos, gated communities and high-rise living. Call Paul (561) 255-7285 or get new-listing alerts.",
+      },
       { name: "author", content: "Palm Beach Rental Pros" },
-      { property: "og:title", content: "Palm Beach Rental Pros | Luxury Rentals" },
-      { property: "og:description", content: "Premier luxury residential rentals in Palm Beach County." },
+      {
+        property: "og:title",
+        content: "Palm Beach County Luxury Rentals | Palm Beach Rental Pros",
+      },
+      {
+        property: "og:description",
+        content:
+          "Luxury rentals in Palm Beach County: waterfront condos, gated communities and high-rise living. Call Paul (561) 255-7285.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:site_name", content: "Palm Beach Rental Pros" },
+      { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@PalmBeachREPros" },
       { name: "google-site-verification", content: "e0FRK75BoVVAS-fVubnxYbibU-k4BLCCDV1jQZpyfes" },
     ],
