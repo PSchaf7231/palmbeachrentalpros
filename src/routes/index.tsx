@@ -3,7 +3,6 @@ import {
   Phone,
   Mail,
   MapPin,
-  Home,
   Building2,
   Star,
   ArrowRight,
@@ -11,9 +10,8 @@ import {
   Key,
   Search,
   DollarSign,
-  ExternalLink,
 } from "lucide-react";
-import { LeadCapture } from "@/components/site/LeadCapture";
+import { AREA_EVENT, LeadCapture } from "@/components/site/LeadCapture";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { StickyCallBar } from "@/components/site/StickyCallBar";
 import {
@@ -21,7 +19,7 @@ import {
   AGENT_PHONE_TEL,
   BROKERAGE_NAME,
   CALL_LABEL,
-  COMMUNITIES as communities,
+  RENTAL_AREAS,
   SITE_NAME,
   SITE_URL,
 } from "@/lib/site";
@@ -58,7 +56,7 @@ export const Route = createFileRoute("/")({
           description: "Luxury residential rental consultancy serving Palm Beach County.",
           telephone: "+1-561-255-7285",
           url: `${SITE_URL}/`,
-          areaServed: "Palm Beach County, FL",
+          areaServed: RENTAL_AREAS.map((name) => ({ "@type": "City", name })),
           parentOrganization: { "@type": "Organization", name: BROKERAGE_NAME },
           employee: {
             "@type": "Person",
@@ -80,6 +78,30 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+const HOW_IT_WORKS = [
+  {
+    title: "Tour",
+    desc: "Tell Paul what you need and when you're free. He'll line up tours of the rentals that fit.",
+  },
+  {
+    title: "Application",
+    desc: "When you find the one, you apply. Paul can walk you through the rental application.",
+  },
+  {
+    title: "Lease",
+    desc: "Review the lease terms and sign once you're comfortable with them.",
+  },
+  {
+    title: "Move-in",
+    desc: "Coordinate the move-in date and details with Paul, then get the keys.",
+  },
+];
+
+function selectArea(area: string) {
+  window.dispatchEvent(new CustomEvent(AREA_EVENT, { detail: area }));
+  document.getElementById("request")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 function Index() {
   return (
@@ -191,49 +213,71 @@ function Index() {
         </section>
 
         {/* Voluntary lead capture (no pop-ups, no gating) */}
-        <LeadCapture id="request" source="home-search" defaultMode="request" />
+        <LeadCapture id="request" source="home-search" defaultMode="request" acceptAreaSelection />
 
-        {/* Communities Section */}
-        <section id="communities" className="py-8 sm:py-10 bg-navy-light/30">
+        {/* Rentals by Area: on-site cards, no external links */}
+        <section id="areas" className="py-8 sm:py-10 bg-navy-light/30 scroll-mt-4">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-6">
               <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-2 block">
-                Neighborhood Expertise
+                Palm Beach County
               </span>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
-                Communities We <span className="text-gold">Serve</span>
+                Rentals by <span className="text-gold">Area</span>
               </h2>
               <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-                Deep local knowledge of Palm Beach County&apos;s most prestigious communities.
+                Pick an area and Paul will keep an eye out for rentals there. You can add more than
+                one.
               </p>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-              {communities.map((community) => (
-                <a
-                  key={community.name}
-                  href={community.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative rounded-lg border border-gold/15 bg-card p-4 transition-all duration-300 hover:border-gold/40 hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/5"
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {RENTAL_AREAS.map((area) => (
+                <button
+                  key={area}
+                  type="button"
+                  onClick={() => selectArea(area)}
+                  className="group text-left rounded-lg border border-gold/15 bg-card p-4 transition-all duration-300 hover:border-gold/40 hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div className="h-8 w-8 rounded-md bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                      <Home className="h-4 w-4 text-gold" />
+                      <MapPin className="h-4 w-4 text-gold" aria-hidden="true" />
                     </div>
-                    <ExternalLink className="h-3.5 w-3.5 text-gold/40 group-hover:text-gold transition-all" />
+                    <ArrowRight className="h-3.5 w-3.5 text-gold/40 group-hover:text-gold transition-all" />
                   </div>
                   <h3 className="font-display text-sm font-semibold text-foreground mb-0.5">
-                    {community.name}
+                    {area}
                   </h3>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">
-                    {community.type}
-                  </p>
-                  <p className="text-[10px] text-gold/70 font-medium truncate">
-                    {community.url.replace("https://", "")}
-                  </p>
-                </a>
+                  <p className="text-[11px] text-gold/80 font-medium">Rentals in {area}</p>
+                </button>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* How renting works: no stats or promises, just the steps */}
+        <section id="how-it-works" className="py-8 sm:py-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-6">
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
+                Renting in Palm Beach County: <span className="text-gold">how it works</span>
+              </h2>
+              <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+                Four steps from first search to move-in day.
+              </p>
+            </div>
+            <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {HOW_IT_WORKS.map((step, i) => (
+                <li key={step.title} className="rounded-lg border border-gold/15 bg-card p-5">
+                  <div className="h-8 w-8 rounded-full bg-gold/15 flex items-center justify-center text-sm font-bold text-gold mb-3">
+                    {i + 1}
+                  </div>
+                  <h3 className="font-display text-base font-semibold text-foreground mb-1.5">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 

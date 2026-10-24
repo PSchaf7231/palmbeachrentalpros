@@ -5,7 +5,7 @@ import {
   AGENT_PHONE_DISPLAY,
   AGENT_PHONE_TEL,
   BROKERAGE_NAME,
-  COMMUNITIES,
+  RENTAL_AREAS,
   getSiteConfig,
 } from "@/lib/site";
 
@@ -56,18 +56,16 @@ export function SiteFooter() {
           </div>
           <div>
             <h4 className="font-display text-xs font-semibold text-foreground uppercase tracking-wider mb-3">
-              Communities
+              Rentals by Area
             </h4>
             <ul className="space-y-1.5">
-              {COMMUNITIES.map((c) => (
-                <li key={c.name}>
+              {RENTAL_AREAS.map((area) => (
+                <li key={area}>
                   <a
-                    href={c.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/#areas"
                     className="text-xs text-muted-foreground hover:text-gold transition-colors"
                   >
-                    {c.name}
+                    {area}
                   </a>
                 </li>
               ))}

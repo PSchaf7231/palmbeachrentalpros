@@ -89,8 +89,8 @@ function Terms() {
       <section>
         <h2>Third-party links</h2>
         <p>
-          The Site links to third-party websites (including community sites). We are not responsible
-          for their content or practices.
+          The Site links to third-party websites. We are not responsible for their content or
+          practices.
         </p>
       </section>
       <section>

@@ -2,6 +2,8 @@ import { useEffect, useId, useState, type FormEvent } from "react";
 import { CheckCircle2, Loader2, Bell, MessageSquareText } from "lucide-react";
 import { AGENT_PHONE_DISPLAY, AGENT_PHONE_TEL, CONSENT_TEXT } from "@/lib/site";
 
+export const AREA_EVENT = "pbrp:area-selected";
+
 type Mode = "request" | "alerts";
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -65,15 +67,38 @@ export function LeadCapture({
   id,
   source,
   defaultMode,
+  acceptAreaSelection = false,
 }: {
   id: string;
   source: string;
   defaultMode: Mode;
+  /** When true, listens for area-card clicks and preselects that area in the alerts form. */
+  acceptAreaSelection?: boolean;
 }) {
   const uid = useId();
   const [mode, setMode] = useState<Mode>(defaultMode);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [areas, setAreas] = useState("");
+
+  useEffect(() => {
+    if (!acceptAreaSelection) return;
+    const onPick = (e: Event) => {
+      const area = (e as CustomEvent<string>).detail;
+      if (!area) return;
+      setMode("alerts");
+      setStatus((prev) => (prev === "success" ? "idle" : prev));
+      setAreas((prev) => {
+        const parts = prev
+          .split(",")
+          .map((x) => x.trim())
+          .filter(Boolean);
+        return parts.includes(area) ? prev : [...parts, area].join(", ");
+      });
+    };
+    window.addEventListener(AREA_EVENT, onPick);
+    return () => window.removeEventListener(AREA_EVENT, onPick);
+  }, [acceptAreaSelection]);
 
   useEffect(() => {
     readUtm();
@@ -349,13 +374,14 @@ export function LeadCapture({
                       </div>
                       <div>
                         <label htmlFor={`${uid}-areas`} className={labelCls}>
-                          Areas / communities{" "}
-                          <span className="text-muted-foreground">(optional)</span>
+                          Areas <span className="text-muted-foreground">(optional)</span>
                         </label>
                         <input
                           id={`${uid}-areas`}
                           name="areas"
                           type="text"
+                          value={areas}
+                          onChange={(e) => setAreas(e.target.value)}
                           maxLength={300}
                           className={inputCls}
                           placeholder="Boca Raton, West Palm Beach, Delray…"

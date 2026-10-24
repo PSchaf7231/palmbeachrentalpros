@@ -28,12 +28,12 @@ export function getSiteConfig() {
 export const CONSENT_TEXT =
   "By checking this box, I agree to receive text messages and emails from Palm Beach Rental Pros (Paul Schafranick, VantaSure Realty) about rental listings, alerts, and my inquiry, which may be sent using automated technology to the number and email I provided. Consent is not a condition of any purchase or service. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out or HELP for help.";
 
-export const COMMUNITIES = [
-  { name: "Two City Plaza", type: "Luxury High Rise", url: "https://twocityplazapb.com" },
-  { name: "Water Club", type: "Waterfront Condo", url: "https://waterclublivingpb.com" },
-  { name: "Alton", type: "Gated Community", url: "https://altonpb.com" },
-  { name: "Vista Blue", type: "Oceanfront Condo", url: "https://vistabluepb.com" },
-  { name: "Seven Bridges", type: "Gated Community", url: "https://sevenbridgespb.com" },
-  { name: "Boca Bridges", type: "Gated Community", url: "https://bocabridgespb.com" },
-  { name: "The Bristol", type: "Luxury High-Rise", url: "https://thebristolpb.com" },
+// Rentals-only service areas (on-site cards; no external links).
+export const RENTAL_AREAS = [
+  "Boca Raton",
+  "Delray Beach",
+  "West Palm Beach",
+  "Palm Beach",
+  "Jupiter",
+  "Boynton Beach",
 ];

@@ -36,7 +36,7 @@ Vercel → Project → Settings → Environment Variables, then redeploy.
 
 ## Project notes
 
-- `src/routes/index.tsx` — home page (search placeholder, lead forms, communities, footer).
+- `src/routes/index.tsx` — home page (search placeholder, lead forms, rentals by area, how-it-works, footer).
 - `src/routes/api.lead.ts` — `POST /api/lead` server route (validation, honeypot, webhook forward).
 - `src/routes/privacy.tsx`, `terms.tsx` — **draft** legal pages; have the broker/attorney review before launch.
 - `src/routes/sitemap[.]xml.ts`, `public/robots.txt` — SEO; canonical host is `https://palmbeachrentalpros.com`.
