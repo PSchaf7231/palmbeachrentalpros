@@ -1,50 +1,34 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Home,
-  Building2,
-  Star,
-  ArrowRight,
-  Shield,
-  Key,
-  Clock,
-  Users,
-  Search,
-  DollarSign,
-  Calendar,
-  ExternalLink,
-} from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { SearchBox } from "@/components/site/SearchBox";
+import { Phone, Mail, MapPin, Building2, ArrowRight, Shield, Key, Users, Search, DollarSign } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Palm Beach Rental Pros | Luxury Residential Rentals" },
+      { title: "Palm Beach Rental Pros | Seasonal & Annual Rentals, Palm Beach County" },
       {
         name: "description",
         content:
-          "Luxury rentals in Palm Beach County with Paul Schafranick — waterfront estates, gated communities, and high-rise living.",
+          "Seasonal and annual rentals in Palm Beach County, from Delray Beach to Boca Raton, with Paul Schafranick.",
       },
       {
         property: "og:title",
-        content: "Palm Beach Rental Pros | Luxury Residential Rentals",
+        content: "Palm Beach Rental Pros | Seasonal & Annual Rentals, Palm Beach County",
       },
       {
         property: "og:description",
         content:
-          "Luxury rentals in Palm Beach County — waterfront estates, gated communities, and high-rise living.",
+          "Seasonal and annual rentals in Palm Beach County, from Delray Beach to Boca Raton, with Paul Schafranick.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://palmbeachrentalpros.com/" },
       { property: "og:site_name", content: "Palm Beach Rental Pros" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Palm Beach Rental Pros | Luxury Residential Rentals" },
+      { name: "twitter:title", content: "Palm Beach Rental Pros | Seasonal & Annual Rentals, Palm Beach County" },
       {
         name: "twitter:description",
         content:
-          "Luxury rentals in Palm Beach County — waterfront estates, gated communities, and high-rise living.",
+          "Seasonal and annual rentals in Palm Beach County, from Delray Beach to Boca Raton, with Paul Schafranick.",
       },
     ],
     links: [
@@ -58,7 +42,7 @@ export const Route = createFileRoute("/")({
           "@type": "RealEstateAgent",
           name: "Palm Beach Rental Pros",
           description:
-            "Boutique luxury residential rental consultancy serving Palm Beach County.",
+            "Seasonal and annual rentals, plus homes for sale, in Palm Beach County, FL.",
           telephone: "+1-561-255-7285",
           url: "https://palmbeachrentalpros.com/",
           areaServed: "Palm Beach County, FL",
@@ -83,37 +67,15 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const communities = [
-  { name: "Two City Plaza", type: "Luxury High Rise", url: "https://twocityplazapb.com" },
-  { name: "Water Club", type: "Waterfront Condo", url: "https://waterclublivingpb.com" },
-  { name: "Alton", type: "Gated Community", url: "https://altonpb.com" },
-  { name: "Vista Blue", type: "Oceanfront Condo", url: "https://vistabluepb.com" },
-  { name: "Seven Bridges", type: "Gated Community", url: "https://sevenbridgespb.com" },
-  { name: "Boca Bridges", type: "Gated Community", url: "https://bocabridgespb.com" },
-  { name: "The Bristol", type: "Luxury High-Rise", url: "https://thebristolpb.com" },
-];
 
 const AGENT_NAME = "Paul Schafranick";
 const AGENT_PHONE_DISPLAY = "561-255-7285";
 const AGENT_PHONE_TEL = "5612557285";
 
+const AGENT_FIRST_NAME = "Paul";
+const AGENT_PHONE_FORMATTED = "(561) 255-7285";
+
 function Index() {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    budget: "",
-    moveIn: "",
-  });
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 4000);
-    setFormData({ name: "", phone: "", email: "", budget: "", moveIn: "" });
-  };
-
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
       <main>
@@ -146,7 +108,7 @@ function Index() {
         </div>
       </div>
 
-      {/* Hero */}
+      {/* Hero: rentals first */}
       <section className="relative flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80')] bg-cover bg-center opacity-20" />
@@ -156,243 +118,72 @@ function Index() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="animate-fade-in-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 mb-4">
-                <Star className="h-3.5 w-3.5 text-gold" />
+                <Key className="h-3.5 w-3.5 text-gold" />
                 <span className="text-xs font-semibold text-gold uppercase tracking-wider">
-                  Palm Beach County&apos;s Elite Rental Specialists
+                  Seasonal &amp; Annual Rentals
                 </span>
               </div>
               <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.1] mb-4">
-                Luxury Living
+                Palm Beach County
                 <br />
-                <span className="text-gold">Redefined</span> in Palm Beach
+                <span className="text-gold">Rentals</span>, Delray to Boca
               </h1>
               <p className="text-base sm:text-lg text-foreground/70 max-w-lg mb-6 leading-relaxed">
-                Exclusive access to the finest waterfront estates, gated
-                communities, and premier high-rise residences.
+                Homes, condos and apartments for rent, seasonal or annual, from
+                Delray Beach and Boca Raton across Palm Beach County. Working
+                with a local agent who picks up the phone.
               </p>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="#listings"
+                  href={`tel:${AGENT_PHONE_TEL}`}
                   className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
                 >
-                  <Search className="h-4 w-4" />
-                  Browse Listings
-                  <ArrowRight className="h-4 w-4" />
+                  <Phone className="h-4 w-4" />
+                  Call {AGENT_FIRST_NAME} {AGENT_PHONE_FORMATTED}
                 </a>
                 <a
-                  href={`tel:${AGENT_PHONE_TEL}`}
+                  href="#search"
                   className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
                 >
-                  <Phone className="h-4 w-4" />
-                  Call {AGENT_PHONE_DISPLAY}
+                  <Search className="h-4 w-4" />
+                  Search Rentals
+                  <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
-              <div className="mt-6 flex items-center gap-4">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="h-8 w-8 rounded-full border-2 border-navy bg-gradient-to-br from-gold/40 to-gold/10 flex items-center justify-center text-[10px] font-bold text-gold"
-                    >
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">500+ Happy Clients</p>
-                  <p className="text-xs text-foreground/50">Trusted across Palm Beach County</p>
-                </div>
-              </div>
             </div>
 
-            {/* Lead Capture Form */}
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <div className="rounded-xl border border-gold/20 bg-card/80 backdrop-blur-sm p-5 sm:p-6 shadow-2xl shadow-black/30">
-                <h2 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-1">
-                  Find Your <span className="text-gold">Dream Home</span>
-                </h2>
-                <p className="text-xs text-muted-foreground mb-4">
-                  {AGENT_NAME} will curate listings just for you.
-                </p>
-                {formSubmitted ? (
-                  <div className="text-center py-6">
-                    <div className="mx-auto h-12 w-12 rounded-full bg-gold/20 flex items-center justify-center mb-3">
-                      <Star className="h-6 w-6 text-gold" />
-                    </div>
-                    <h3 className="font-display text-lg font-bold text-foreground mb-1">
-                      Request Received!
-                    </h3>
-                    <p className="text-xs text-muted-foreground">
-                      {AGENT_NAME} will contact you within 24 hours.
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleFormSubmit} className="space-y-3">
-                    <div>
-                      <label className="block text-xs font-medium text-foreground/80 mb-1">
-                        Full Name
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full rounded-md border border-gold/20 bg-background/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
-                        placeholder="John Smith"
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-medium text-foreground/80 mb-1">
-                          Phone
-                        </label>
-                        <input
-                          type="tel"
-                          required
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full rounded-md border border-gold/20 bg-background/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
-                          placeholder="(561) 555-0123"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-foreground/80 mb-1">
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full rounded-md border border-gold/20 bg-background/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
-                          placeholder="john@example.com"
-                        />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-medium text-foreground/80 mb-1">
-                          Monthly Budget
-                        </label>
-                        <div className="relative">
-                          <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                          <input
-                            type="text"
-                            required
-                            value={formData.budget}
-                            onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                            className="w-full rounded-md border border-gold/20 bg-background/50 pl-8 pr-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
-                            placeholder="5,000+"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-foreground/80 mb-1">
-                          Move-in Date
-                        </label>
-                        <div className="relative">
-                          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                          <input
-                            type="date"
-                            required
-                            value={formData.moveIn}
-                            onChange={(e) => setFormData({ ...formData, moveIn: e.target.value })}
-                            className="w-full rounded-md border border-gold/20 bg-background/50 pl-8 pr-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full rounded-md bg-gold px-5 py-2.5 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25 flex items-center justify-center gap-2"
-                    >
-                      <Search className="h-4 w-4" />
-                      Get Personalized Listings
-                    </button>
-                    <p className="text-[10px] text-center text-muted-foreground">
-                      Your information is secure. We respect your privacy.
-                    </p>
-                  </form>
-                )}
-              </div>
+            {/* Search: defaults to Rentals, with a For Sale option */}
+            <div id="search" className="animate-fade-in-up scroll-mt-4" style={{ animationDelay: "0.2s" }}>
+              <SearchBox initialMode="rent" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* IDX Embed Placeholder */}
-      <section id="listings" className="py-8 sm:py-10">
+      {/* Areas */}
+      <section id="areas" className="py-8 sm:py-10 bg-navy-light/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
-              Featured <span className="text-gold">Listings</span>
+              Rentals by <span className="text-gold">Area</span>
             </h2>
             <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-              Browse our curated selection of luxury rentals, updated in real-time.
+              Pick a town to start your rental search.
             </p>
           </div>
-          <div className="rounded-xl border border-gold/30 bg-card p-1 shadow-lg shadow-black/20">
-            <div className="relative rounded-lg border border-gold/20 bg-navy/50 min-h-[320px] flex items-center justify-center p-6">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html:
-                    '<!-- BOLDTRAIL FILTERED RENTAL IDX EMBED WIDGET GOES HERE - FILTER SET TO RESIDENTIAL RENTALS $2,500+ -->',
-                }}
-              />
-              <div className="text-center">
-                <Search className="h-10 w-10 text-gold/40 mx-auto mb-3" />
-                <p className="text-base font-display font-semibold text-foreground/60 mb-1">
-                  IDX Widget Placeholder
-                </p>
-                <p className="text-xs text-muted-foreground max-w-md">
-                  BoldTrail filtered rental IDX embed will render here.
-                  Filter preset: Residential Rentals $2,500+.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Communities Section */}
-      <section id="communities" className="py-8 sm:py-10 bg-navy-light/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
-            <span className="text-xs font-semibold text-gold uppercase tracking-widest mb-2 block">
-              Neighborhood Expertise
-            </span>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
-              Communities We <span className="text-gold">Serve</span>
-            </h2>
-            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-              Deep local knowledge of Palm Beach County&apos;s most prestigious communities.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {communities.map((community) => (
-              <a
-                key={community.name}
-                href={community.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative rounded-lg border border-gold/15 bg-card p-4 transition-all duration-300 hover:border-gold/40 hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/5"
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {["Delray Beach", "Boca Raton", "Boynton Beach", "Jupiter", "West Palm Beach"].map((area) => (
+              <Link
+                key={area}
+                to="/search"
+                search={{ mode: "rent", area }}
+                className="group rounded-lg border border-gold/15 bg-card p-4 text-center transition-all duration-300 hover:border-gold/40 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/5"
               >
-                <div className="flex items-start justify-between mb-2">
-                  <div className="h-8 w-8 rounded-md bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-                    <Home className="h-4 w-4 text-gold" />
-                  </div>
-                  <ExternalLink className="h-3.5 w-3.5 text-gold/40 group-hover:text-gold transition-all" />
+                <div className="mx-auto mb-2 h-8 w-8 rounded-md bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
+                  <MapPin className="h-4 w-4 text-gold" />
                 </div>
-                <h3 className="font-display text-sm font-semibold text-foreground mb-0.5">
-                  {community.name}
-                </h3>
-                <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">
-                  {community.type}
-                </p>
-                <p className="text-[10px] text-gold/70 font-medium truncate">
-                  {community.url.replace("https://", "")}
-                </p>
-              </a>
+                <span className="font-display text-sm font-semibold text-foreground">{area}</span>
+              </Link>
             ))}
           </div>
         </div>
@@ -407,25 +198,24 @@ function Index() {
                 About {AGENT_NAME}
               </span>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                Your Trusted Partner in <span className="text-gold">Luxury Rentals</span>
+                Your Local <span className="text-gold">Rental</span> Agent
               </h2>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
-                Palm Beach Rental Pros is a boutique luxury rental consultancy
-                specializing in the most sought-after residential communities
-                across Palm Beach County. From waterfront estates in Boca Raton
-                to premier high-rise living in West Palm Beach, {AGENT_NAME}
-                connects discerning clients with exceptional properties.
+                Palm Beach Rental Pros helps renters find seasonal and annual
+                rentals across Palm Beach County, with a focus on Delray Beach
+                and Boca Raton. {AGENT_NAME} works with you directly, from the
+                first search through the lease.
               </p>
               <p className="text-sm text-foreground/70 mb-4 leading-relaxed">
-                White-glove service includes personalized property tours, lease
-                negotiation, and ongoing tenant advocacy.
+                Decided to buy instead? Search homes for sale from the same
+                search box, or just call.
               </p>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { icon: Shield, label: "Licensed & Insured" },
-                  { icon: Key, label: "Exclusive Access" },
-                  { icon: Clock, label: "24/7 Support" },
-                  { icon: MapPin, label: "Local Experts" },
+                  { icon: Key, label: "Seasonal & annual rentals" },
+                  { icon: MapPin, label: "Delray Beach to Boca Raton" },
+                  { icon: Users, label: "Direct line to Paul" },
+                  { icon: Search, label: "Rent or buy search" },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-2">
                     <div className="h-7 w-7 rounded-md bg-gold/10 flex items-center justify-center flex-shrink-0">
@@ -453,7 +243,7 @@ function Index() {
               Property <span className="text-gold">Management</span>
             </h2>
             <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-              Comprehensive management services for property owners.
+              Management services for property owners.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -498,11 +288,11 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-r from-gold/10 via-transparent to-gold/5" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3">
-            Ready to Find Your <span className="text-gold">Perfect Home</span>?
+            Ready to Find Your <span className="text-gold">Rental</span>?
           </h2>
           <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-6">
-            {AGENT_NAME} is standing by to help you discover the finest
-            properties Palm Beach County has to offer.
+            Tell {AGENT_NAME} what you need, a seasonal stay or an annual
+            lease, and he&apos;ll help you find it.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <a
@@ -510,7 +300,7 @@ function Index() {
               className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-2.5 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
             >
               <Phone className="h-4 w-4" />
-              Call {AGENT_PHONE_DISPLAY}
+              Call {AGENT_FIRST_NAME} {AGENT_PHONE_FORMATTED}
             </a>
             <a
               href="mailto:paul@palmbeachrentalpros.com"
@@ -526,7 +316,7 @@ function Index() {
       {/* Footer */}
       <footer className="border-t border-gold/10 bg-navy-light/20 pt-10 pb-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 mb-3">
                 <Building2 className="h-5 w-5 text-gold" />
@@ -535,40 +325,15 @@ function Index() {
                 </span>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                Palm Beach County&apos;s premier luxury rental specialists.
+                Seasonal and annual rentals in Palm Beach County.
               </p>
-            </div>
-            <div>
-              <h4 className="font-display text-xs font-semibold text-foreground uppercase tracking-wider mb-3">
-                Communities
-              </h4>
-              <ul className="space-y-1.5">
-                {communities.map((c) => (
-                  <li key={c.name}>
-                    <a
-                      href={c.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-muted-foreground hover:text-gold transition-colors"
-                    >
-                      {c.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
             </div>
             <div>
               <h4 className="font-display text-xs font-semibold text-foreground uppercase tracking-wider mb-3">
                 Services
               </h4>
               <ul className="space-y-1.5">
-                {[
-                  "Luxury Rentals",
-                  "Property Management",
-                  "Tenant Placement",
-                  "Investment Consulting",
-                  "Market Analysis",
-                ].map((s) => (
+                {["Seasonal & Annual Rentals", "Homes for Sale", "Property Management"].map((s) => (
                   <li key={s}>
                     <span className="text-xs text-muted-foreground">{s}</span>
                   </li>
