@@ -20,6 +20,10 @@ export interface SearchParams {
   minPrice?: number;
   maxPrice?: number;
   beds?: number;
+  minBeds?: number;
+  maxBeds?: number;
+  minBaths?: number;
+  maxBaths?: number;
   /** Only meaningful when mode === "rent". */
   term?: RentalTerm;
 }
@@ -72,8 +76,8 @@ export const AREAS = [
  */
 export function sparkFilterForMode(mode: SearchMode): string {
   return mode === "rent"
-    ? "PropertyType Eq 'Residential Lease'"
-    : "PropertyType Ne 'Residential Lease'";
+    ? "PropertyType eq 'Residential Lease'"
+    : "PropertyType ne 'Residential Lease' and PropertyType ne 'Commercial Lease'";
 }
 
 const placeholderProvider: ListingsProvider = {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { Search } from "lucide-react";
-import { AREAS, type RentalTerm, type SearchMode } from "@/lib/listings";
+import { AREAS, type SearchMode } from "@/lib/listings";
 
 const fieldClass =
   "w-full rounded-md border border-gold/20 bg-background/50 px-3 py-2 text-sm text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors";
@@ -10,24 +10,45 @@ export function SearchBox({ initialMode = "rent" }: { initialMode?: SearchMode }
   const navigate = useNavigate();
   const [mode, setMode] = useState<SearchMode>(initialMode);
   const [area, setArea] = useState("");
-  const [term, setTerm] = useState<RentalTerm>("any");
-  const [beds, setBeds] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const [f, setF] = useState({ minBeds: "", maxBeds: "", minBaths: "", maxBaths: "", minPrice: "", maxPrice: "" });
+  const set = (k: keyof typeof f) => (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) =>
+    setF((o) => ({ ...o, [k]: e.target.value }));
+  const n = (v: string) => {
+    const x = Number(v.replace(/[^0-9]/g, ""));
+    return x > 0 ? x : undefined;
+  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const price = Number(maxPrice.replace(/[^0-9]/g, ""));
     navigate({
       to: "/search",
       search: {
         mode,
         area: area || undefined,
-        term: mode === "rent" && term !== "any" ? term : undefined,
-        beds: beds ? Number(beds) : undefined,
-        maxPrice: price > 0 ? price : undefined,
+        minBeds: n(f.minBeds),
+        maxBeds: n(f.maxBeds),
+        minBaths: n(f.minBaths),
+        maxBaths: n(f.maxBaths),
+        minPrice: n(f.minPrice),
+        maxPrice: n(f.maxPrice),
       },
     });
   };
+
+  const countSel = (k: keyof typeof f, label: string) => (
+    <select aria-label={label} value={f[k]} onChange={set(k)} className={fieldClass}>
+      <option value="">{label.startsWith("Min") ? "No min" : "No max"}</option>
+      {[1, 2, 3, 4, 5, 6].map((x) => (
+        <option key={x} value={x}>{x}</option>
+      ))}
+    </select>
+  );
+  const row = (label: string, a: React.ReactNode, b: React.ReactNode) => (
+    <div>
+      <span className="block text-xs font-medium text-foreground/80 mb-1">{label}</span>
+      <div className="grid grid-cols-2 gap-3">{a}{b}</div>
+    </div>
+  );
 
   const tab = (value: SearchMode, label: string) => (
     <button
@@ -79,47 +100,13 @@ export function SearchBox({ initialMode = "rent" }: { initialMode?: SearchMode }
             ))}
           </select>
         </div>
-        {mode === "rent" && (
-          <div>
-            <label htmlFor="sb-term" className="block text-xs font-medium text-foreground/80 mb-1">
-              Lease type
-            </label>
-            <select id="sb-term" value={term} onChange={(e) => setTerm(e.target.value as RentalTerm)} className={fieldClass}>
-              <option value="any">Seasonal or annual</option>
-              <option value="annual">Annual</option>
-              <option value="seasonal">Seasonal</option>
-            </select>
-          </div>
+        {row("Bedrooms", countSel("minBeds", "Min beds"), countSel("maxBeds", "Max beds"))}
+        {row("Bathrooms", countSel("minBaths", "Min baths"), countSel("maxBaths", "Max baths"))}
+        {row(
+          mode === "rent" ? "Monthly rent" : "Price",
+          <input aria-label="Min price" inputMode="numeric" value={f.minPrice} onChange={set("minPrice")} placeholder="No min" className={fieldClass} />,
+          <input aria-label="Max price" inputMode="numeric" value={f.maxPrice} onChange={set("maxPrice")} placeholder="No max" className={fieldClass} />,
         )}
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label htmlFor="sb-beds" className="block text-xs font-medium text-foreground/80 mb-1">
-              Bedrooms
-            </label>
-            <select id="sb-beds" value={beds} onChange={(e) => setBeds(e.target.value)} className={fieldClass}>
-              <option value="">Any</option>
-              {[1, 2, 3, 4, 5].map((n) => (
-                <option key={n} value={n}>
-                  {n}+
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="sb-price" className="block text-xs font-medium text-foreground/80 mb-1">
-              {mode === "rent" ? "Max monthly rent" : "Max price"}
-            </label>
-            <input
-              id="sb-price"
-              type="text"
-              inputMode="numeric"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-              placeholder={mode === "rent" ? "4,000" : "750,000"}
-              className={fieldClass}
-            />
-          </div>
-        </div>
         <button
           type="submit"
           className="w-full rounded-md bg-gold px-5 py-2.5 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25 flex items-center justify-center gap-2"

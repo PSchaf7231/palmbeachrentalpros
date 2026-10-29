@@ -7,6 +7,10 @@ const searchInput = z.object({
   minPrice: z.number().optional(),
   maxPrice: z.number().optional(),
   beds: z.number().optional(),
+  minBeds: z.number().optional(),
+  maxBeds: z.number().optional(),
+  minBaths: z.number().optional(),
+  maxBaths: z.number().optional(),
   term: z.enum(["any", "annual", "seasonal"]).optional(),
   page: z.number().int().min(1).max(50).optional(),
 });

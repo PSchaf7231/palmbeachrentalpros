@@ -9,6 +9,11 @@ interface SearchSchema {
   area?: string;
   term?: RentalTerm;
   beds?: number;
+  minBeds?: number;
+  maxBeds?: number;
+  minBaths?: number;
+  maxBaths?: number;
+  minPrice?: number;
   maxPrice?: number;
 }
 
@@ -23,6 +28,11 @@ export const Route = createFileRoute("/search")({
     area: typeof s.area === "string" && s.area ? s.area : undefined,
     term: s.term === "annual" || s.term === "seasonal" ? s.term : undefined,
     beds: num(s.beds),
+    minBeds: num(s.minBeds),
+    maxBeds: num(s.maxBeds),
+    minBaths: num(s.minBaths),
+    maxBaths: num(s.maxBaths),
+    minPrice: num(s.minPrice),
     maxPrice: num(s.maxPrice),
   }),
   head: () => ({
