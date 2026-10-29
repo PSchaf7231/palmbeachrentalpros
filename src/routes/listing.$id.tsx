@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { loadLastSearch, type LastSearch } from "@/lib/lastSearch";
 import { ArrowLeft, Phone, MessageSquare } from "lucide-react";
 import { IDX_DISCLAIMER } from "@/lib/listings";
 import { getListing } from "@/lib/api/listings.functions";
@@ -11,6 +13,8 @@ export const Route = createFileRoute("/listing/$id")({
 
 function ListingPage() {
   const { id } = Route.useParams();
+  const [back, setBack] = useState<LastSearch>({ mode: "rent" });
+  useEffect(() => { const s = loadLastSearch(); if (s) setBack(s); }, []);
   const { data: l, isLoading } = useQuery({
     queryKey: ["listing", id],
     queryFn: () => getListing({ data: { id } }).catch(() => null),
@@ -27,7 +31,7 @@ function ListingPage() {
         </p>
       </div>
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
-        <Link to="/search" search={{ mode: "rent" }} className="inline-flex items-center gap-1.5 text-sm text-gold hover:text-gold-light mb-6">
+        <Link to="/search" search={back as never} className="inline-flex items-center gap-1.5 text-sm text-gold hover:text-gold-light mb-6">
           <ArrowLeft className="h-4 w-4" /> Back to search
         </Link>
         {isLoading ? (

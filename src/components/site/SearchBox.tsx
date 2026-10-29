@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { loadLastSearch, type LastSearch } from "@/lib/lastSearch";
 import { useNavigate } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 import { AREAS, type SearchMode } from "@/lib/listings";
@@ -6,11 +7,24 @@ import { AREAS, type SearchMode } from "@/lib/listings";
 const fieldClass =
   "w-full rounded-md border border-gold/20 bg-background/50 px-3 py-2 text-sm text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors";
 
-export function SearchBox({ initialMode = "rent" }: { initialMode?: SearchMode }) {
+export function SearchBox({ initialMode = "rent", initial }: { initialMode?: SearchMode; initial?: LastSearch }) {
   const navigate = useNavigate();
   const [mode, setMode] = useState<SearchMode>(initialMode);
   const [area, setArea] = useState("");
-  const [f, setF] = useState({ minBeds: "", maxBeds: "", minBaths: "", maxBaths: "", minPrice: "", maxPrice: "" });
+  const fromSaved = (o: LastSearch | null | undefined) => {
+    const g = (k: string) => (o?.[k] != null ? String(o[k]) : "");
+    return { minBeds: g("minBeds") || g("beds"), maxBeds: g("maxBeds"), minBaths: g("minBaths"), maxBaths: g("maxBaths"), minPrice: g("minPrice"), maxPrice: g("maxPrice") };
+  };
+  const [f, setF] = useState(() => fromSaved(initial));
+  // Prefill from the URL (search page) or, on the home page, the last search this session.
+  useEffect(() => {
+    const o = initial ?? loadLastSearch();
+    if (!o) return;
+    if (o.mode === "rent" || o.mode === "buy") setMode(o.mode);
+    setArea(typeof o.area === "string" ? o.area : "");
+    setF(fromSaved(o));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(initial ?? null)]);
   const set = (k: keyof typeof f) => (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) =>
     setF((o) => ({ ...o, [k]: e.target.value }));
   const n = (v: string) => {

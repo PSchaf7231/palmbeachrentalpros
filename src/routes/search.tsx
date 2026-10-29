@@ -1,5 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { saveLastSearch } from "@/lib/lastSearch";
 import { ArrowLeft, Phone, Mail } from "lucide-react";
 import { SearchBox } from "@/components/site/SearchBox";
 import { IDX_DISCLAIMER, getListingsProvider, type SearchMode, type RentalTerm } from "@/lib/listings";
@@ -15,6 +17,7 @@ interface SearchSchema {
   maxBaths?: number;
   minPrice?: number;
   maxPrice?: number;
+  page?: number;
 }
 
 const num = (v: unknown) => {
@@ -34,6 +37,7 @@ export const Route = createFileRoute("/search")({
     maxBaths: num(s.maxBaths),
     minPrice: num(s.minPrice),
     maxPrice: num(s.maxPrice),
+    page: num(s.page),
   }),
   head: () => ({
     meta: [
@@ -46,8 +50,16 @@ export const Route = createFileRoute("/search")({
 
 function SearchPage() {
   const params = Route.useSearch();
+  const navigate = useNavigate();
+  useEffect(() => saveLastSearch(params), [params]);
+  const page = params.page ?? 1;
+  const goPage = (n: number) => {
+    navigate({ to: "/search", search: { ...params, page: n > 1 ? n : undefined } });
+    window.scrollTo({ top: 0 });
+  };
   const { data, isLoading } = useQuery({
     queryKey: ["listings", params],
+    staleTime: 5 * 60 * 1000,
     queryFn: () => getListingsProvider().search(params),
   });
 
@@ -65,7 +77,7 @@ function SearchPage() {
           <ArrowLeft className="h-4 w-4" /> Palm Beach Rental Pros
         </Link>
         <div className="grid md:grid-cols-[360px_1fr] gap-8 items-start">
-          <SearchBox key={params.mode} initialMode={params.mode} />
+          <SearchBox initialMode={params.mode} initial={params} />
           <section>
             <h1 className="font-display text-2xl sm:text-3xl font-bold mb-3">
               {params.mode === "rent" ? "Rentals" : "Homes for sale"}
@@ -99,6 +111,13 @@ function SearchPage() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-6 flex items-center justify-between text-sm">
+                <button type="button" disabled={page <= 1} onClick={() => goPage(page - 1)}
+                  className="rounded-md border border-gold/40 px-4 py-2 text-gold disabled:opacity-30">← Previous</button>
+                <span className="text-muted-foreground">Page {page}</span>
+                <button type="button" disabled={data.listings.length < 24} onClick={() => goPage(page + 1)}
+                  className="rounded-md border border-gold/40 px-4 py-2 text-gold disabled:opacity-30">Next →</button>
+              </div>
               <p className="mt-6 text-[11px] text-muted-foreground">{IDX_DISCLAIMER}</p>
               </>
             ) : (
