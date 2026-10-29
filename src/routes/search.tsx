@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Phone, Mail } from "lucide-react";
 import { SearchBox } from "@/components/site/SearchBox";
-import { getListingsProvider, type SearchMode, type RentalTerm } from "@/lib/listings";
+import { IDX_DISCLAIMER, getListingsProvider, type SearchMode, type RentalTerm } from "@/lib/listings";
 
 interface SearchSchema {
   mode: SearchMode;
@@ -64,21 +64,36 @@ function SearchPage() {
             {isLoading ? (
               <p className="text-sm text-muted-foreground">Loading…</p>
             ) : data && data.listings.length > 0 ? (
-              <ul className="space-y-3">
+              <>
+              <ul className="grid sm:grid-cols-2 gap-4">
                 {data.listings.map((l) => (
-                  <li key={l.id} className="rounded-lg border border-gold/15 bg-card p-4 text-sm">
-                    <p className="font-semibold">{l.address}, {l.city}</p>
-                    <p className="text-muted-foreground">
-                      ${l.price.toLocaleString()}
-                      {l.beds ? ` · ${l.beds} bd` : ""}
-                      {l.baths ? ` · ${l.baths} ba` : ""}
-                    </p>
-                    {l.listingBrokerage && (
-                      <p className="text-[11px] text-muted-foreground mt-1">Listing courtesy of {l.listingBrokerage}</p>
-                    )}
+                  <li key={l.id} className="rounded-lg border border-gold/15 bg-card overflow-hidden text-sm">
+                    <Link to="/listing/$id" params={{ id: l.id }} className="block hover:opacity-90">
+                      {l.photoUrl ? (
+                        <img src={l.photoUrl} alt={`${l.address}, ${l.city}`} loading="lazy" className="h-44 w-full object-cover" />
+                      ) : (
+                        <div className="h-44 w-full bg-muted" />
+                      )}
+                      <div className="p-4">
+                        <p className="text-lg font-bold text-gold">
+                          ${l.price.toLocaleString()}{params.mode === "rent" ? "/mo" : ""}
+                        </p>
+                        <p className="font-semibold">{l.address}, {l.city}</p>
+                        <p className="text-muted-foreground">
+                          {l.beds ? `${l.beds} bd` : ""}
+                          {l.baths ? ` · ${l.baths} ba` : ""}
+                          {l.mlsNumber ? ` · MLS# ${l.mlsNumber}` : ""}
+                        </p>
+                        {l.listingBrokerage && (
+                          <p className="text-[11px] text-muted-foreground mt-1">Listing courtesy of {l.listingBrokerage}</p>
+                        )}
+                      </div>
+                    </Link>
                   </li>
                 ))}
               </ul>
+              <p className="mt-6 text-[11px] text-muted-foreground">{IDX_DISCLAIMER}</p>
+              </>
             ) : (
               <div className="rounded-xl border border-gold/20 bg-card p-6">
                 <h2 className="font-display text-lg font-semibold mb-2">Live {label} search is coming soon</h2>

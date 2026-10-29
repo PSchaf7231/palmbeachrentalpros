@@ -32,8 +32,15 @@ export interface Listing {
   beds?: number;
   baths?: number;
   photoUrl?: string;
+  photos?: string[];
+  mlsNumber?: string;
+  state?: string;
+  zip?: string;
+  sqft?: number;
+  remarks?: string;
   /** Required IDX attribution: listing brokerage. */
   listingBrokerage?: string;
+  listingAgent?: string;
 }
 
 export interface SearchResult {
@@ -75,9 +82,23 @@ const placeholderProvider: ListingsProvider = {
   },
 };
 
-// TODO(spark): const sparkProvider: ListingsProvider = { async search(p) { ... } }
-// implemented in a createServerFn using process.env.SPARK_API_KEY and sparkFilterForMode().
+// Spark provider: server-side via createServerFn (see api/listings.functions.ts
+// and spark.server.ts). Falls back to "unavailable" if the key is missing or
+// the API errors.
+const sparkProvider: ListingsProvider = {
+  async search(p) {
+    try {
+      const { searchListings } = await import("./api/listings.functions");
+      return await searchListings({ data: p });
+    } catch {
+      return placeholderProvider.search(p);
+    }
+  },
+};
 
 export function getListingsProvider(): ListingsProvider {
-  return placeholderProvider;
+  return sparkProvider;
 }
+
+export const IDX_DISCLAIMER =
+  "Listing information is provided by Beaches MLS for consumers' personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in renting or purchasing. Information is deemed reliable but not guaranteed.";
