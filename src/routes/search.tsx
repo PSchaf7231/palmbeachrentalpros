@@ -94,9 +94,6 @@ function SearchPage() {
                           {l.baths ? ` · ${l.baths} ba` : ""}
                           {l.mlsNumber ? ` · MLS# ${l.mlsNumber}` : ""}
                         </p>
-                        {l.listingBrokerage && (
-                          <p className="text-[11px] text-muted-foreground mt-1">Listing courtesy of {l.listingBrokerage}</p>
-                        )}
                       </div>
                     </Link>
                   </li>

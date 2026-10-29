@@ -42,14 +42,6 @@ function ListingPage() {
           </div>
         ) : (
           <article>
-            {l.photos && l.photos.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6">
-                {l.photos.slice(0, 9).map((src: string, i: number) => (
-                  <img key={src} src={src} alt={`${l.address} photo ${i + 1}`} loading={i ? "lazy" : "eager"}
-                    className={`w-full object-cover rounded ${i === 0 ? "col-span-2 sm:col-span-3 h-72 sm:h-96" : "h-32 sm:h-40"}`} />
-                ))}
-              </div>
-            )}
             <p className="text-3xl font-bold text-gold">${l.price.toLocaleString()}</p>
             <h1 className="font-display text-2xl font-bold mt-1">{l.address}</h1>
             <p className="text-muted-foreground">{[l.city, l.state, l.zip].filter(Boolean).join(", ")}</p>
@@ -65,6 +57,14 @@ function ListingPage() {
                 <MessageSquare className="h-4 w-4" /> Text about this one
               </a>
             </div>
+            {l.photos && l.photos.length > 0 && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6 mt-2">
+                {l.photos.slice(0, 9).map((src: string, i: number) => (
+                  <img key={src} src={src} alt={`${l.address} photo ${i + 1}`} loading={i ? "lazy" : "eager"}
+                    className={`w-full object-cover rounded ${i === 0 ? "col-span-2 sm:col-span-3 h-72 sm:h-96" : "h-32 sm:h-40"}`} />
+                ))}
+              </div>
+            )}
             {l.remarks && <p className="text-sm leading-relaxed whitespace-pre-line">{l.remarks}</p>}
             {l.listingBrokerage && (
               <p className="mt-6 text-xs text-muted-foreground">

@@ -43,6 +43,18 @@ export function SearchBox({ initialMode = "rent" }: { initialMode?: SearchMode }
       ))}
     </select>
   );
+  const prices = mode === "rent"
+    ? [1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000, 6000, 7500, 10000]
+    : [100000, 200000, 300000, 400000, 500000, 750000, 1000000, 1500000, 2000000, 3000000, 5000000];
+  const fmt = (x: number) => (x >= 1e6 ? `$${x / 1e6}M` : x >= 1e4 && mode === "buy" ? `$${x / 1000}k` : `$${x.toLocaleString()}`);
+  const priceSel = (k: "minPrice" | "maxPrice", label: string) => (
+    <select aria-label={label} value={f[k]} onChange={set(k)} className={fieldClass}>
+      <option value="">{k === "minPrice" ? "No min" : "No max"}</option>
+      {prices.map((x, i) => (
+        <option key={x} value={x}>{fmt(x)}{k === "minPrice" && i === prices.length - 1 ? "+" : ""}</option>
+      ))}
+    </select>
+  );
   const row = (label: string, a: React.ReactNode, b: React.ReactNode) => (
     <div>
       <span className="block text-xs font-medium text-foreground/80 mb-1">{label}</span>
@@ -55,7 +67,7 @@ export function SearchBox({ initialMode = "rent" }: { initialMode?: SearchMode }
       type="button"
       role="tab"
       aria-selected={mode === value}
-      onClick={() => setMode(value)}
+      onClick={() => { setMode(value); setF((o) => ({ ...o, minPrice: "", maxPrice: "" })); }}
       className={`flex-1 rounded-md px-4 py-2 text-sm font-semibold transition-colors ${
         mode === value ? "bg-gold text-navy" : "text-foreground/70 hover:text-gold"
       }`}
@@ -104,8 +116,8 @@ export function SearchBox({ initialMode = "rent" }: { initialMode?: SearchMode }
         {row("Bathrooms", countSel("minBaths", "Min baths"), countSel("maxBaths", "Max baths"))}
         {row(
           mode === "rent" ? "Monthly rent" : "Price",
-          <input aria-label="Min price" inputMode="numeric" value={f.minPrice} onChange={set("minPrice")} placeholder="No min" className={fieldClass} />,
-          <input aria-label="Max price" inputMode="numeric" value={f.maxPrice} onChange={set("maxPrice")} placeholder="No max" className={fieldClass} />,
+          priceSel("minPrice", "Min price"),
+          priceSel("maxPrice", "Max price"),
         )}
         <button
           type="submit"

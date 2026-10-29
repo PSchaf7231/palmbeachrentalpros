@@ -70,6 +70,7 @@ const enc = encodeURIComponent;
 
 export async function sparkSearch(p: SearchParams & { page?: number }): Promise<SearchResult> {
   const f = ["StandardStatus eq 'Active'", sparkFilterForMode(p.mode)];
+  f.push("CountyOrParish eq 'Palm Beach'");
   if (p.area) f.push(`City eq ${q(p.area)}`);
   const minBeds = p.minBeds ?? p.beds;
   if (minBeds) f.push(`BedroomsTotal ge ${Math.floor(minBeds)}`);
