@@ -114,8 +114,8 @@ function Index() {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80')] bg-cover bg-center opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 md:py-14 w-full">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
             <div className="animate-fade-in-up">
               <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 mb-4">
                 <Key className="h-3.5 w-3.5 text-gold" />
@@ -123,12 +123,15 @@ function Index() {
                   Seasonal &amp; Annual Rentals
                 </span>
               </div>
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.1] mb-4">
+              <h1 className="font-display text-[1.75rem] md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.1] mb-3 md:mb-4">
                 Palm Beach County
                 <br />
                 <span className="text-gold">Rentals</span>
               </h1>
-              <p className="text-base sm:text-lg text-foreground/70 max-w-lg mb-6 leading-relaxed">
+              <p className="md:hidden text-base text-foreground/80 mb-4 leading-relaxed">
+                Call or text for listings before they hit the sites.
+              </p>
+              <p className="hidden md:block text-lg text-foreground/70 max-w-lg mb-6 leading-relaxed">
                 Homes, condos and apartments for rent, seasonal or annual, from
                 the coast to the western communities of Palm Beach County. Working
                 with a local agent who picks up the phone.
@@ -150,6 +153,7 @@ function Index() {
                 </a>
                 <a
                   href="#search"
+                  onClick={(e) => { e.preventDefault(); document.getElementById("search")?.scrollIntoView({ behavior: "smooth", block: "start" }); history.replaceState(null, "", "#search"); }}
                   className="inline-flex items-center justify-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
                 >
                   <Search className="h-4 w-4" />
