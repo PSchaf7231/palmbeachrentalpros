@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SearchBox } from "@/components/site/SearchBox";
-import { Phone, Mail, MapPin, Building2, ArrowRight, Shield, Key, Users, Search, DollarSign } from "lucide-react";
+import { Phone, Mail, MapPin, Building2, ArrowRight, Shield, Key, Users, Search, DollarSign, MessageSquare } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Seasonal and annual rentals in Palm Beach County, from Delray Beach to Boca Raton, with Paul Schafranick.",
+          "Seasonal and annual rentals across Palm Beach County, from Jupiter to West Palm Beach to Boca Raton, with Paul Schafranick.",
       },
       {
         property: "og:title",
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Seasonal and annual rentals in Palm Beach County, from Delray Beach to Boca Raton, with Paul Schafranick.",
+          "Seasonal and annual rentals across Palm Beach County, from Jupiter to West Palm Beach to Boca Raton, with Paul Schafranick.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://palmbeachrentalpros.com/" },
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:description",
         content:
-          "Seasonal and annual rentals in Palm Beach County, from Delray Beach to Boca Raton, with Paul Schafranick.",
+          "Seasonal and annual rentals across Palm Beach County, from Jupiter to West Palm Beach to Boca Raton, with Paul Schafranick.",
       },
     ],
     links: [
@@ -126,30 +126,31 @@ function Index() {
               <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.1] mb-4">
                 Palm Beach County
                 <br />
-                <span className="text-gold">Rentals</span>, Delray to Boca
+                <span className="text-gold">Rentals</span>
               </h1>
               <p className="text-base sm:text-lg text-foreground/70 max-w-lg mb-6 leading-relaxed">
                 Homes, condos and apartments for rent, seasonal or annual, from
-                Delray Beach and Boca Raton across Palm Beach County. Working
+                the coast to the western communities of Palm Beach County. Working
                 with a local agent who picks up the phone.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
                 <a
                   href={`tel:${AGENT_PHONE_TEL}`}
-                  className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
+                  className="inline-flex items-center justify-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
                 >
                   <Phone className="h-4 w-4" />
                   Call {AGENT_FIRST_NAME} {AGENT_PHONE_FORMATTED}
                 </a>
                 <a
                   href={`sms:${AGENT_PHONE_TEL}`}
-                  className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
                 >
-                  Text {AGENT_PHONE_FORMATTED}
+                  <MessageSquare className="h-4 w-4" />
+              Text {AGENT_PHONE_FORMATTED}
                 </a>
                 <a
                   href="#search"
-                  className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
                 >
                   <Search className="h-4 w-4" />
                   Search Rentals
@@ -177,8 +178,8 @@ function Index() {
               Pick a town to start your rental search.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {["Delray Beach", "Boca Raton", "Boynton Beach", "Jupiter", "West Palm Beach"].map((area) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {["Jupiter", "Palm Beach Gardens", "West Palm Beach", "Boynton Beach", "Delray Beach", "Boca Raton"].map((area) => (
               <Link
                 key={area}
                 to="/search"
@@ -208,8 +209,8 @@ function Index() {
               </h2>
               <p className="text-sm text-foreground/70 mb-3 leading-relaxed">
                 Palm Beach Rental Pros helps renters find seasonal and annual
-                rentals across Palm Beach County, with a focus on Delray Beach
-                and Boca Raton. {AGENT_NAME} works with you directly, from the
+                rentals across all of Palm Beach County, from Jupiter to
+                Boca Raton. {AGENT_NAME} works with you directly, from the
                 first search through the lease.
               </p>
               <p className="text-sm text-foreground/70 mb-4 leading-relaxed">
@@ -219,7 +220,7 @@ function Index() {
               <div className="grid grid-cols-2 gap-3">
                 {[
                   { icon: Key, label: "Seasonal & annual rentals" },
-                  { icon: MapPin, label: "Delray Beach to Boca Raton" },
+                  { icon: MapPin, label: "All of Palm Beach County" },
                   { icon: Users, label: "Direct line to Paul" },
                   { icon: Search, label: "Rent or buy search" },
                 ].map((item) => (
@@ -300,23 +301,24 @@ function Index() {
             Tell {AGENT_NAME} what you need, a seasonal stay or an annual
             lease, and he&apos;ll help you find it.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3">
             <a
               href={`tel:${AGENT_PHONE_TEL}`}
-              className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-2.5 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-gold px-6 py-2.5 text-sm font-bold text-navy transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/25"
             >
               <Phone className="h-4 w-4" />
               Call {AGENT_FIRST_NAME} {AGENT_PHONE_FORMATTED}
             </a>
             <a
               href={`sms:${AGENT_PHONE_TEL}`}
-              className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-gold/40 px-6 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
             >
+              <MessageSquare className="h-4 w-4" />
               Text {AGENT_PHONE_FORMATTED}
             </a>
             <a
               href="mailto:paul@palmbeachrentalpros.com"
-              className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-6 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-gold/40 px-6 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
             >
               <Mail className="h-4 w-4" />
               Email Paul
@@ -380,10 +382,10 @@ function Index() {
             </div>
           </div>
           <div className="border-t border-gold/10 pt-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               &copy; {new Date().getFullYear()} Palm Beach Rental Pros. All rights reserved.
             </p>
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               Licensed Real Estate Professional in the State of Florida
             </p>
           </div>

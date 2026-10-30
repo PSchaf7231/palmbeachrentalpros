@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Palm Beach Rental Pros | Seasonal & Annual Rentals" },
-      { name: "description", content: "Seasonal and annual rentals in Palm Beach County, from Delray Beach to Boca Raton." },
+      { name: "description", content: "Seasonal and annual rentals in Palm Beach County, from Jupiter to Boca Raton." },
       { name: "author", content: "Palm Beach Rental Pros" },
       { property: "og:title", content: "Palm Beach Rental Pros | Seasonal & Annual Rentals" },
       { property: "og:description", content: "Seasonal and annual rentals in Palm Beach County." },

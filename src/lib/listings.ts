@@ -56,7 +56,7 @@ export interface ListingsProvider {
   search(params: SearchParams): Promise<SearchResult>;
 }
 
-/** Areas offered in the search box. Delray–Boca first. */
+/** Areas offered in the search box. All Palm Beach County towns. */
 export const AREAS = [
   "Delray Beach",
   "Boca Raton",
