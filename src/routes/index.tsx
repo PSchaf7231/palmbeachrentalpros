@@ -98,6 +98,14 @@ function Index() {
           <div className="flex flex-row items-center gap-3 sm:gap-4 text-sm">
             <span className="text-foreground/80 font-medium">{AGENT_NAME}</span>
             <a
+              href="https://pbr-owners.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground/80 hover:text-gold font-semibold transition-colors"
+            >
+              For Owners
+            </a>
+            <a
               href={`tel:${AGENT_PHONE_TEL}`}
               className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light font-semibold transition-colors"
             >
@@ -256,6 +264,14 @@ function Index() {
             <p className="text-sm text-muted-foreground max-w-xl mx-auto">
               Management services for property owners.
             </p>
+            <a
+              href="https://pbr-owners.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center justify-center rounded-md border border-gold/40 px-5 py-2 text-sm font-semibold text-gold hover:bg-gold/10 transition-colors"
+            >
+              Own a rental? See how Paul leases it fast &rarr; For Owners
+            </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
