@@ -81,21 +81,21 @@ function Index() {
       <main>
       {/* Brokerage line (required for IDX / FL advertising) */}
       <div className="w-full bg-navy border-b border-white/10">
-        <p className="max-w-7xl mx-auto px-4 py-1.5 text-center text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-white">
+        <p className="max-w-7xl mx-auto px-4 py-1 sm:py-1.5 text-center text-[11px] sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white">
           VantaSure Realty
         </p>
       </div>
 
       {/* Top Brand Bar — sole identifier, no nav */}
       <div className="w-full border-b border-gold/20 bg-navy/95 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3 flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-2 text-center sm:text-left">
           <div className="flex items-center gap-2">
-            <Building2 className="h-6 w-6 text-gold" />
-            <span className="font-display text-lg sm:text-xl font-semibold tracking-wide">
+            <Building2 className="h-5 w-5 sm:h-6 sm:w-6 text-gold" />
+            <span className="font-display text-base sm:text-xl font-semibold tracking-wide">
               Palm Beach <span className="text-gold">Rental</span> Pros
             </span>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4 text-sm">
+          <div className="flex flex-row items-center gap-3 sm:gap-4 text-sm">
             <span className="text-foreground/80 font-medium">{AGENT_NAME}</span>
             <a
               href={`tel:${AGENT_PHONE_TEL}`}
