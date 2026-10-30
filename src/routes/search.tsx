@@ -129,7 +129,7 @@ function SearchPage() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <a
-                    href="tel:5612557285"
+                    href="tel:+15612557285"
                     className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-bold text-navy hover:bg-gold-light"
                   >
                     <Phone className="h-4 w-4" /> Call Paul (561) 255-7285

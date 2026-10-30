@@ -40,7 +40,7 @@ function ListingPage() {
           <div className="rounded-xl border border-gold/20 bg-card p-6">
             <h1 className="font-display text-xl font-semibold mb-2">This listing isn&apos;t available right now</h1>
             <p className="text-sm text-muted-foreground mb-4">Call Paul and he&apos;ll find you similar options.</p>
-            <a href="tel:5612557285" className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-bold text-navy">
+            <a href="tel:+15612557285" className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-2.5 text-sm font-bold text-navy">
               <Phone className="h-4 w-4" /> Call Paul (561) 255-7285
             </a>
           </div>
@@ -54,11 +54,11 @@ function ListingPage() {
               {l.mlsNumber ? ` · MLS# ${l.mlsNumber}` : ""}
             </p>
             <div className="flex flex-wrap gap-3 my-6">
-              <a href="tel:5612557285" className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-3 text-sm font-bold text-navy hover:bg-gold-light">
-                <Phone className="h-4 w-4" /> Call about this one
+              <a href="tel:+15612557285" className="inline-flex items-center gap-2 rounded-md bg-gold px-5 py-3 text-sm font-bold text-navy hover:bg-gold-light">
+                <Phone className="h-4 w-4" /> Call (561) 255-7285
               </a>
-              <a href={`sms:5612557285?&body=${smsBody}`} className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-3 text-sm font-semibold text-gold hover:bg-gold/10">
-                <MessageSquare className="h-4 w-4" /> Text about this one
+              <a href={`sms:+15612557285?&body=${smsBody}`} className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-3 text-sm font-semibold text-gold hover:bg-gold/10">
+                <MessageSquare className="h-4 w-4" /> Text (561) 255-7285
               </a>
             </div>
             {l.photos && l.photos.length > 0 && (

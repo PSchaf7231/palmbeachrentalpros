@@ -70,7 +70,7 @@ export const Route = createFileRoute("/")({
 
 const AGENT_NAME = "Paul Schafranick";
 const AGENT_PHONE_DISPLAY = "561-255-7285";
-const AGENT_PHONE_TEL = "5612557285";
+const AGENT_PHONE_TEL = "+15612557285";
 
 const AGENT_FIRST_NAME = "Paul";
 const AGENT_PHONE_FORMATTED = "(561) 255-7285";
@@ -140,6 +140,12 @@ function Index() {
                 >
                   <Phone className="h-4 w-4" />
                   Call {AGENT_FIRST_NAME} {AGENT_PHONE_FORMATTED}
+                </a>
+                <a
+                  href={`sms:${AGENT_PHONE_TEL}`}
+                  className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
+                >
+                  Text {AGENT_PHONE_FORMATTED}
                 </a>
                 <a
                   href="#search"
@@ -301,6 +307,12 @@ function Index() {
             >
               <Phone className="h-4 w-4" />
               Call {AGENT_FIRST_NAME} {AGENT_PHONE_FORMATTED}
+            </a>
+            <a
+              href={`sms:${AGENT_PHONE_TEL}`}
+              className="inline-flex items-center gap-2 rounded-md border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-all duration-200 hover:bg-gold/10"
+            >
+              Text {AGENT_PHONE_FORMATTED}
             </a>
             <a
               href="mailto:paul@palmbeachrentalpros.com"

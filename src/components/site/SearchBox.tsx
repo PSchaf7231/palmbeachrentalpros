@@ -58,7 +58,7 @@ export function SearchBox({ initialMode = "rent", initial }: { initialMode?: Sea
     </select>
   );
   const prices = mode === "rent"
-    ? [1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000, 6000, 7500, 10000]
+    ? [1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000, 6000, 7500, 10000, 15000, 20000, 30000, 40000, 50000]
     : [100000, 200000, 300000, 400000, 500000, 750000, 1000000, 1500000, 2000000, 3000000, 5000000];
   const fmt = (x: number) => (x >= 1e6 ? `$${x / 1e6}M` : x >= 1e4 && mode === "buy" ? `$${x / 1000}k` : `$${x.toLocaleString()}`);
   const priceSel = (k: "minPrice" | "maxPrice", label: string) => (
