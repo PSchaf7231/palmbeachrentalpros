@@ -94,3 +94,25 @@ export async function sparkListing(id: string): Promise<Listing | null> {
   const row = json?.value?.[0];
   return row ? toListing(row) : null;
 }
+
+/** Lightweight active inventory used by the dynamic listing sitemap. */
+export async function sparkSitemapListings(limit = 5000): Promise<Listing[] | null> {
+  const filter = enc(["StandardStatus eq 'Active'", "CountyOrParish eq 'Palm Beach'", "PropertyType ne 'Commercial Lease'"].join(" and "));
+  const select = enc(["ListingKey", "ListingId", "ListPrice", "StreetNumber", "StreetName", "StreetSuffix", "UnitNumber", "City", "StateOrProvince", "PostalCode", "PropertyType", "ModificationTimestamp", "ListOfficeName"].join(","));
+  const key = process.env.SPARK_API_TOKEN || process.env.SPARK_API_KEY;
+  if (!key) return null;
+  let url: string | null = `${BASE}/Property?$top=200&$filter=${filter}&$select=${select}&$orderby=${enc("ModificationTimestamp desc,ListingKey desc")}`;
+  const rows: Reso[] = [];
+  try {
+    while (url && rows.length < limit) {
+      const res = await fetch(url, { headers: { Authorization: `Bearer ${key}`, Accept: "application/json" } });
+      if (!res.ok) return null;
+      const data = await res.json() as { value?: Reso[]; "@odata.nextLink"?: string };
+      rows.push(...(data.value ?? []));
+      url = data["@odata.nextLink"] ?? null;
+    }
+    return rows.slice(0, limit).map(toListing).filter((listing) => listing.id);
+  } catch {
+    return null;
+  }
+}

@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ListingIdRouteImport } from './routes/listing.$id'
+import { Route as ListingsSlugRouteImport } from './routes/listings.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const ListingIdRoute = ListingIdRouteImport.update({
   path: '/listing/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ListingsSlugRoute = ListingsSlugRouteImport.update({
+  id: '/listings/$slug',
+  path: '/listings/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/listing/$id': typeof ListingIdRoute
+  '/listings/$slug': typeof ListingsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/listing/$id': typeof ListingIdRoute
+  '/listings/$slug': typeof ListingsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,21 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/listing/$id': typeof ListingIdRoute
+  '/listings/$slug': typeof ListingsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/search' | '/sitemap.xml' | '/listing/$id'
+  fullPaths:
+    '/' | '/search' | '/sitemap.xml' | '/listing/$id' | '/listings/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/search' | '/sitemap.xml' | '/listing/$id'
-  id: '__root__' | '/' | '/search' | '/sitemap.xml' | '/listing/$id'
+  to: '/' | '/search' | '/sitemap.xml' | '/listing/$id' | '/listings/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/search'
+    | '/sitemap.xml'
+    | '/listing/$id'
+    | '/listings/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +83,7 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ListingIdRoute: typeof ListingIdRoute
+  ListingsSlugRoute: typeof ListingsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListingIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/listings/$slug': {
+      id: '/listings/$slug'
+      path: '/listings/$slug'
+      fullPath: '/listings/$slug'
+      preLoaderRoute: typeof ListingsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +131,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ListingIdRoute: ListingIdRoute,
+  ListingsSlugRoute: ListingsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { saveLastSearch } from "@/lib/lastSearch";
 import { ArrowLeft, Phone, Mail } from "lucide-react";
 import { SearchBox } from "@/components/site/SearchBox";
-import { IDX_DISCLAIMER, getListingsProvider, type SearchMode, type RentalTerm } from "@/lib/listings";
+import { IDX_DISCLAIMER, getListingsProvider, listingSlug, type SearchMode, type RentalTerm } from "@/lib/listings";
 
 interface SearchSchema {
   mode: SearchMode;
@@ -90,7 +90,7 @@ function SearchPage() {
               <ul className="grid sm:grid-cols-2 gap-4">
                 {data.listings.map((l) => (
                   <li key={l.id} className="rounded-lg border border-gold/15 bg-card overflow-hidden text-sm">
-                    <Link to="/listing/$id" params={{ id: l.id }} className="block hover:opacity-90">
+                    <Link to="/listings/$slug" params={{ slug: listingSlug(l) }} className="block hover:opacity-90">
                       {l.photoUrl ? (
                         <img src={l.photoUrl} alt={`${l.address}, ${l.city}`} loading="lazy" className="h-44 w-full object-cover" />
                       ) : (

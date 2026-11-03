@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { listingSlug } from "@/lib/listings";
 
 const BASE_URL = "https://palmbeachrentalpros.com";
 
@@ -18,6 +19,10 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: SitemapEntry[] = [
           { path: "/", lastmod: now, changefreq: "weekly", priority: "1.0" },
         ];
+        const { sparkSitemapListings } = await import("@/lib/spark.server");
+        const listings = await sparkSitemapListings();
+        if (listings === null) return new Response("Listings feed unavailable", { status: 503, headers: { "Cache-Control": "no-store" } });
+        entries.push(...listings.map((listing) => ({ path: `/listings/${listingSlug(listing)}`, changefreq: "daily" as const, priority: "0.7" })));
 
         const urls = entries.map((e) =>
           [
@@ -42,7 +47,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         return new Response(xml, {
           headers: {
             "Content-Type": "application/xml",
-            "Cache-Control": "public, max-age=3600",
+            "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
           },
         });
       },

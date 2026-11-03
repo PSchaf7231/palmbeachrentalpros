@@ -56,6 +56,31 @@ export interface ListingsProvider {
   search(params: SearchParams): Promise<SearchResult>;
 }
 
+const slugWords = (value: string) => value
+  .toLowerCase()
+  .replace(/&/g, " and ")
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-+|-+$/g, "")
+  .slice(0, 100)
+  .replace(/-+$/g, "");
+
+/** Human-readable canonical URL with the stable Spark ListingKey at the end. */
+export function listingSlug(listing: Pick<Listing, "id" | "address" | "city" | "zip">): string {
+  const place = [listing.address, listing.city, listing.zip].filter(Boolean).join(" ");
+  return `${slugWords(place) || "listing"}--${encodeURIComponent(listing.id)}`;
+}
+
+export function listingIdFromSlug(slug: string): string | null {
+  const separator = slug.lastIndexOf("--");
+  if (separator < 0) return null;
+  try {
+    const id = decodeURIComponent(slug.slice(separator + 2));
+    return /^[A-Za-z0-9_-]{1,40}$/.test(id) ? id : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Areas offered in the search box. All Palm Beach County towns. */
 export const AREAS = [
   "Delray Beach",
