@@ -18,6 +18,8 @@ export const Route = createFileRoute("/sitemap.xml")({
         const now = new Date().toISOString();
         const entries: SitemapEntry[] = [
           { path: "/", lastmod: now, changefreq: "weekly", priority: "1.0" },
+          { path: "/privacy", lastmod: now, changefreq: "yearly", priority: "0.3" },
+          { path: "/terms", lastmod: now, changefreq: "yearly", priority: "0.3" },
         ];
         const { sparkSitemapListings } = await import("@/lib/spark.server");
         const listings = await sparkSitemapListings();
